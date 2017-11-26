@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cae4fc"
+    android:orientation="vertical"
+    android:weightSum="7"
+    tools:context="org.androidtown.hyme.MainActivity">s
+
+    <!-- blank -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></LinearLayout>
+
+    <!-- content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <!-- title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/main_activity_title"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/main_activity_title_acronym" />
+
+        </LinearLayout>
+
+        <!-- description -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/main_activity_title_description"/>
+        </LinearLayout>
+
+        <!-- Kakao login-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="0.5">
+
+            <Button
+                android:id="@+id/bt_kakaoLogin"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:background="@drawable/kakao_login"
+                />
+        </LinearLayout>
+
+        <!-- HYME login -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="0.5">
+
+            <Button
+                android:id="@+id/bt_hymeLogin"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:text="@string/main_activity_login"
+                android:textSize="15dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="#63b2f7"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <!-- blank -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></LinearLayout>
+
+</LinearLayout>

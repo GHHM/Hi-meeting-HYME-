@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">HYME</string>
+
+    <!-- main activity -->
+    <string name="main_activity_title">HYME</string>
+    <string name="main_activity_title_acronym">(Have Your Meeting Easy!)</string>
+    <string name="main_activity_title_description">원격회의에 최적화된 당신의 회의도우미</string>
+    <string name="main_activity_login">하이미 계정으로 로그인</string>
+
+    <!-- register activity -->
+    <string name="register_activity_login_description">로그인 정보 입력</string>
+</resources>
