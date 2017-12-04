@@ -34,14 +34,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/main_activity_title"
+                android:text="@string/activity_main_title"
                 android:textSize="30dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/main_activity_title_acronym" />
+                android:text="@string/activity_main_title_acronym" />
 
         </LinearLayout>
 
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/main_activity_title_description"/>
+                android:text="@string/activity_main_title_description"/>
         </LinearLayout>
 
         <!-- Kakao login-->
@@ -84,7 +84,7 @@
                 android:id="@+id/bt_hymeLogin"
                 android:layout_width="230dp"
                 android:layout_height="50dp"
-                android:text="@string/main_activity_login"
+                android:text="@string/activity_main_login"
                 android:textSize="15dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/round_shape"

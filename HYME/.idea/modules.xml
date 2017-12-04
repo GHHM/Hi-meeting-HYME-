@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HYME.iml" filepath="$PROJECT_DIR$/HYME.iml" />
+      <module fileurl="file://C:\Users\Master\AndroidStudioProjects\HYME\HYME.iml" filepath="C:\Users\Master\AndroidStudioProjects\HYME\HYME.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Master\AndroidStudioProjects\HYME\app\app.iml" filepath="C:\Users\Master\AndroidStudioProjects\HYME\app\app.iml" />
     </modules>
   </component>
 </project>
