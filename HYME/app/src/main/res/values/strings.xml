@@ -13,24 +13,4 @@
     <string name="activity_login_password">****</string>
     <string name="activity_login_register">회원가입</string>
     <string name="activity_login_login">로그인</string>
-
-    <!-- speech activity -->
-    <string name="activity_speech_speaker">현재 발언자</string>
-    <string name="activity_speech_speaker_name">아무개</string>
-    <string name="activity_speech_say">제생각은요\n주저리주저리주러지주저리....</string>
-    <string name="activity_speech_want">발언하기</string>
-    <string name="activity_speech_participants">회의 참여자</string>
-
-    <!-- speech request dialog -->
-    <string name="dialog_request_speech_content">아무개 님께서 발언권을 요청하였습니다.</string>
-    <string name="dialog_request_speech_accept">수락</string>
-    <string name="dialog_request_speech_deny">거절</string>
-
-    <!-- speech dialog -->
-    <string name="dialog_speech_comment">발언의 종류를 골라주세요</string>
-    <string name="dialog_speech_opinion">의견</string>
-    <string name="dialog_speech_ask">질문</string>
-    <string name="dialog_speech_additional">추가내용</string>
-    <string name="dialog_speech_answer">답변</string>
-    <string name="dialog_speech_ongoing">발언중</string>
 </resources>

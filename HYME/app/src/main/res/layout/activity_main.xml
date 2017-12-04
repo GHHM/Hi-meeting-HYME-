@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBlue"
+    android:background="#cae4fc"
     android:orientation="vertical"
     android:weightSum="7"
     tools:context="org.androidtown.hyme.MainActivity">s
@@ -88,7 +88,7 @@
                 android:textSize="15dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/round_shape"
-                android:backgroundTint="@color/cleanBlue"/>
+                android:backgroundTint="#63b2f7"/>
         </LinearLayout>
 
 

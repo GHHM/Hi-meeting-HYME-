@@ -49,13 +49,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray">
+                    android:backgroundTint="#BDBDBD">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/user_id"
-                        android:backgroundTint="@color/gray"/>
+                        android:backgroundTint="#A9A9A9"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,13 +100,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray">
+                    android:backgroundTint="#BDBDBD">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/password"
-                        android:backgroundTint="@color/gray"/>
+                        android:backgroundTint="#A9A9A9"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -152,10 +152,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/lightBlue"
+                    android:backgroundTint="#cae4fc"
                     android:layout_weight="1"
                     android:text="@string/activity_login_register"
-                    android:textColor="@color/cleanBlue"/>
+                    android:textColor="#63b2f7"/>
 
                 <Space
                     android:layout_width="0dp"
@@ -166,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/cleanBlue"
+                    android:backgroundTint="#63b2f7"
                     android:layout_weight="1"
                     android:text="@string/activity_login_login"
                     android:textColor="#ffffff"/>
