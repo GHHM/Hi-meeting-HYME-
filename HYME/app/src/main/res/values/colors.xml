@@ -10,4 +10,6 @@
     <color name="gold">#FFD700</color>
     <color name="red">#FF0000</color>
     <color name="limeGreen">#32CD32</color>
+    <color name="Orange">#FFA500</color>
+    <color name="littleDark">#717171</color>
 </resources>
