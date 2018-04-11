@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity{
         if(ed_user_id.getText().toString().equals("user001")){
 
             if(ed_password.getText().toString().equals("0000")){
-                Intent intent = new Intent(LoginActivity.this, ParticipantActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MeetingRoomActivity.class);
                 startActivity(intent);
             }
 

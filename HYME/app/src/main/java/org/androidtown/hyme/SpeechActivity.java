@@ -40,9 +40,11 @@ public class SpeechActivity extends AppCompatActivity {
 
     // set speech type
     int typeStatus = 0;
+    int saveStatus = 0;
 
     // Save string
     String saveString = "";
+    String bundleString = "";
 
 
     // voice recognition
@@ -157,12 +159,22 @@ public class SpeechActivity extends AppCompatActivity {
 
                 } else if (bt_start_voice_recog.getText().toString() == getResources().getString(R.string.activity_speech_ongoing)) {
                     bt_start_voice_recog.setText(getResources().getString(R.string.activity_speech_want));
+
+                    if(typeStatus != 0){
+                        saveStatus = typeStatus;
+                    }
+
                     typeStatus = 0;
                     tv_speak_type.setText(getResources().getString(R.string.activity_speech_ready));
                     tv_speak_type.setBackgroundColor(getResources().getColor(R.color.littleDark));
 
+                    Toast.makeText(getApplicationContext(), "발언을 로그에 저장했습니다.", Toast.LENGTH_SHORT);
+                    bundleString = saveString;
+
                     /* send data */
-                    //sendData(tv_voice_recog_result.getText().toString());
+                    //sendData(saveString);
+
+                    stopVoiceRecorder();
 
                     rg_speech_type.clearCheck();
                 }
@@ -197,7 +209,11 @@ public class SpeechActivity extends AppCompatActivity {
         bt_go_participant = (Button) findViewById(R.id.bt_show_status);
         bt_go_participant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Bundle myBundle =  new Bundle();
+                myBundle.putInt("type", saveStatus);
+                myBundle.putString("data", bundleString);
                 Intent intent = new Intent(SpeechActivity.this, ParticipantActivity.class);
+                intent.putExtras(myBundle);
                 startActivity(intent);
             }
         });
@@ -205,7 +221,11 @@ public class SpeechActivity extends AppCompatActivity {
         bt_show_log = (Button) findViewById(R.id.bt_show_log);
         bt_show_log.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Bundle myBundle =  new Bundle();
+                myBundle.putInt("type", saveStatus);
+                myBundle.putString("data", bundleString);
                 Intent intent = new Intent(SpeechActivity.this, LogActivity.class);
+                intent.putExtras(myBundle);
                 startActivity(intent);
             }
         });
@@ -218,7 +238,7 @@ public class SpeechActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        stopVoiceRecorder();
+        //stopVoiceRecorder();
 
         // Stop Cloud Speech API
         if ((mSpeechServiceListener != null) && (speechAPI != null)) {

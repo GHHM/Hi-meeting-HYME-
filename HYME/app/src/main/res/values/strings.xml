@@ -14,6 +14,9 @@
     <string name="activity_login_register">회원가입</string>
     <string name="activity_login_login">로그인</string>
 
+    <!-- meeting list activity -->
+    <string name="activity_meeting_title">Meeting list</string>
+
     <!-- speech activity -->
     <string name="activity_speech_speaker">현재 발언자</string>
     <string name="activity_speech_speaker_name">홍길동</string>

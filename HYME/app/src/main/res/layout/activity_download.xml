@@ -70,7 +70,7 @@
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray"
+                    android:backgroundTint="@color/gold"
                     android:button="@android:color/transparent"
                     android:text="@string/dialog_speech_opinion"
                     android:textAlignment="center"
@@ -82,7 +82,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="30dp"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray"
+                    android:backgroundTint="@color/cleanBlue"
                     android:button="@android:color/transparent"
                     android:text="@string/dialog_speech_additional"
                     android:textAlignment="center"
@@ -101,7 +101,7 @@
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray"
+                    android:backgroundTint="@color/limeGreen"
                     android:button="@android:color/transparent"
                     android:text="@string/dialog_speech_ask"
                     android:textAlignment="center"
@@ -113,7 +113,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="30dp"
                     android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray"
+                    android:backgroundTint="@color/red"
                     android:button="@android:color/transparent"
                     android:text="@string/dialog_speech_answer"
                     android:textAlignment="center"
@@ -124,7 +124,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"/>
+            android:layout_weight="0.3" />
 
         <TextView
             android:layout_width="match_parent"
@@ -144,44 +144,44 @@
             android:layout_weight="1"
             android:gravity="center">
 
-                <CheckBox
-                    android:id="@+id/cb_format_word"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray"
-                    android:button="@android:color/transparent"
-                    android:text="@string/activity_download_select_format_word"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
+            <CheckBox
+                android:id="@+id/cb_format_word"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@color/navy"
+                android:button="@android:color/transparent"
+                android:text="@string/activity_download_select_format_word"
+                android:textAlignment="center"
+                android:textColor="#ffffff" />
 
-                <CheckBox
-                    android:id="@+id/cb_format_pdf"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/round_shape"
-                    android:backgroundTint="@color/darkerGray"
-                    android:button="@android:color/transparent"
-                    android:text="@string/activity_download_select_format_pdf"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
+            <CheckBox
+                android:id="@+id/cb_format_pdf"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@color/colorAccent"
+                android:button="@android:color/transparent"
+                android:text="@string/activity_download_select_format_pdf"
+                android:textAlignment="center"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5" />
 
         <Button
             android:id="@+id/bt_download_confirm"
-            android:layout_gravity="center"
             android:layout_width="400dp"
             android:layout_height="0dp"
+            android:layout_gravity="center"
             android:layout_weight="1.5"
             android:backgroundTint="#666666"
             android:text="@string/activity_download_select_confirm"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <!-- progress bar(update soon) -->s

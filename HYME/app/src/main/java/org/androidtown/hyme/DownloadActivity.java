@@ -55,7 +55,6 @@ public class DownloadActivity extends AppCompatActivity implements CompoundButto
             }
         });
 
-        cb_type_opinion.setOnCheckedChangeListener(this);
         cb_type_additional.setOnCheckedChangeListener(this);
         cb_type_ask.setOnCheckedChangeListener(this);
         cb_type_answer.setOnCheckedChangeListener(this);
@@ -67,31 +66,32 @@ public class DownloadActivity extends AppCompatActivity implements CompoundButto
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
 
         if(cb_type_opinion.isChecked()){
+            cb_type_opinion.setButtonDrawable(R.drawable.round_shape);
             cb_type_opinion.setBackgroundColor(Color.parseColor("#FFD700"));
         }
         else{
-            cb_type_opinion.setBackgroundColor(Color.parseColor("#BDBDBD"));
+            //cb_type_opinion.setBackgroundColor(Color.parseColor("#BDBDBD"));
         }
 
         if(cb_type_additional.isChecked()){
             cb_type_additional.setBackgroundColor(Color.parseColor("#63b2f7"));
         }
         else{
-            cb_type_additional.setBackgroundColor(Color.parseColor("#BDBDBD"));
+           // cb_type_additional.setBackgroundColor(Color.parseColor("#BDBDBD"));
         }
 
         if(cb_type_ask.isChecked()){
             cb_type_ask.setBackgroundColor(Color.parseColor("#32CD32"));
         }
         else{
-            cb_type_ask.setBackgroundColor(Color.parseColor("#BDBDBD"));
+         //   cb_type_ask.setBackgroundColor(Color.parseColor("#BDBDBD"));
         }
 
         if(cb_type_answer.isChecked()){
-            cb_type_answer.setBackgroundColor(Color.parseColor("#FF0000"));
+           cb_type_answer.setBackgroundColor(Color.parseColor("#FF0000"));
         }
         else{
-            cb_type_answer.setBackgroundColor(Color.parseColor("#BDBDBD"));
+         //   cb_type_answer.setBackgroundColor(Color.parseColor("#BDBDBD"));
         }
 
 
@@ -99,14 +99,14 @@ public class DownloadActivity extends AppCompatActivity implements CompoundButto
             cb_format_word.setBackgroundColor(Color.parseColor("#63b2f7"));
         }
         else{
-            cb_format_word.setBackgroundColor(Color.parseColor("#BDBDBD"));
+            //cb_format_word.setBackgroundColor(Color.parseColor("#BDBDBD"));
         }
 
         if(cb_format_pdf.isChecked()){
             cb_format_pdf.setBackgroundColor(Color.parseColor("#FF0000"));
         }
         else{
-            cb_format_pdf.setBackgroundColor(Color.parseColor("#BDBDBD"));
+         //   cb_format_pdf.setBackgroundColor(Color.parseColor("#BDBDBD"));
         }
     }
 }

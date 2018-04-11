@@ -71,6 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="@string/dialog_speech_opinion" />
 
             <CheckBox
@@ -79,6 +80,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="2"
+                android:checked="true"
+
                 android:text="@string/dialog_speech_additional" />
         </LinearLayout>
 
@@ -93,6 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="@string/dialog_speech_ask" />
 
             <CheckBox
@@ -101,6 +105,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="2"
+                android:checked="true"
                 android:text="@string/dialog_speech_answer" />
         </LinearLayout>
     </LinearLayout>
