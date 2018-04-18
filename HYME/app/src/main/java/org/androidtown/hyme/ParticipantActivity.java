@@ -1,19 +1,17 @@
 package org.androidtown.hyme;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created by Master on 2017-12-06.
  */
 
-public class ParticipantActivity extends AppCompatActivity{
+public class ParticipantActivity extends AppCompatActivity {
 
     /* Get list */
     ParticipantList participantList;
@@ -87,8 +85,8 @@ public class ParticipantActivity extends AppCompatActivity{
         bt_temp_go_meeting = (Button) findViewById(R.id.bt_temp_go_meeting);
         bt_temp_go_meeting.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(ParticipantActivity.this, SpeechActivity.class);
-                startActivity(intent);
+             //   Intent intent = new Intent(ParticipantActivity.this, SpeechActivity.class);
+               // startActivity(intent);
             }
         });
 

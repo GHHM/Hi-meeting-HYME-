@@ -11,7 +11,7 @@ import android.widget.ListView;
  * Created by Master on 2017-12-12.
  */
 
-public class MeetingRoomActivity extends AppCompatActivity{
+public class MeetingRoomActivity extends AppCompatActivity {
 
     ListView lv_meeting_list;
     RoomList roomList;
@@ -38,8 +38,8 @@ public class MeetingRoomActivity extends AppCompatActivity{
 
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-                Intent intent = new Intent(MeetingRoomActivity.this, SpeechActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(MeetingRoomActivity.this, SpeechActivity.class);
+             //   startActivity(intent);
             }
 
         });

@@ -1,8 +1,0 @@
-
-xsquid:S00116"]Rename this field "lv_participant_log" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°¦°øùÿÿÿÿ
-`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¤åñ¼
-psquid:MaximumInheritanceDepth"=This class has 11 parents which is greater than 5 authorized.(´Œãœýÿÿÿÿ8»ê¼³„,
-xsquid:S00116"]Rename this field "bt_temp_go_meeting" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³Ôž’ùÿÿÿÿ
-Xsquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ
-Vsquid:UselessImportCheck"4Remove this unused import 'android.widget.EditText'.(†Å›Ú
-ysquid:S00116"^Rename this field "lv_participant_list" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê¦úÌÿÿÿÿÿ

@@ -1,11 +1,0 @@
-
-dsquid:S1192"HDefine a constant instead of duplicating this literal "#BDBDBD" 6 times.(íîÿí8¤Æ‡µ„,
-|squid:S00116"ZRename this field "cb_type_opinion" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„™ùÿÿÿÿ8¨æÏ´„,
-vsquid:S00116"YRename this field "cb_format_word" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹–²å8ˆûÑ´„,
-zsquid:S00116"XRename this field "cb_format_pdf" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼ûÔòùÿÿÿÿ8»ºÒ´„,
-ksquid:MaximumInheritanceDepth"=This class has 11 parents which is greater than 5 authorized.(èä¹8Îø¾³„,
-squid:S00116"]Rename this field "cb_type_additional" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š‡Í¶øÿÿÿÿ8¨æÏ´„,
-xsquid:S00116"VRename this field "cb_type_ask" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛÉÚ›ÿÿÿÿÿ8ªÆĞ´„,
-{squid:S00116"YRename this field "bt_go_previous" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şİ¡Æùÿÿÿÿ8ÿøÔ´„,
-{squid:S00116"YRename this field "cb_type_answer" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×Üá®øÿÿÿÿ8ıñĞ´„,
-zsquid:S00116"^Rename this field "bt_download_confirm" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™òäY8ï‰Ô´„,

@@ -1,11 +1,9 @@
 package org.androidtown.hyme;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +11,7 @@ import android.widget.Toast;
  * Created by Master on 2017-12-06.
  */
 
-public class RequestSpeechActivity extends AppCompatActivity{
+public class RequestSpeechActivity extends AppCompatActivity {
 
     Button bt_speech_opinion;
     Button bt_speech_ask;
@@ -44,8 +42,8 @@ public class RequestSpeechActivity extends AppCompatActivity{
 
         bt_go_back.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(RequestSpeechActivity.this, SpeechActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(RequestSpeechActivity.this, SpeechActivity.class);
+                //startActivity(intent);
             }
         });
 
