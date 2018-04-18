@@ -38,8 +38,8 @@ public class MeetingRoomActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-               // Intent intent = new Intent(MeetingRoomActivity.this, SpeechActivity.class);
-             //   startActivity(intent);
+                Intent intent = new Intent(MeetingRoomActivity.this, SpeechActivity.class);
+                startActivity(intent);
             }
 
         });

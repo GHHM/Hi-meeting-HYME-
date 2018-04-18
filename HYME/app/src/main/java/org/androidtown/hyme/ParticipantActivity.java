@@ -85,8 +85,8 @@ public class ParticipantActivity extends AppCompatActivity {
         bt_temp_go_meeting = (Button) findViewById(R.id.bt_temp_go_meeting);
         bt_temp_go_meeting.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-             //   Intent intent = new Intent(ParticipantActivity.this, SpeechActivity.class);
-               // startActivity(intent);
+                Intent intent = new Intent(ParticipantActivity.this, SpeechActivity.class);
+                startActivity(intent);
             }
         });
 
