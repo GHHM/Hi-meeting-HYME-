@@ -7,7 +7,7 @@
     android:background="@color/lightBlue"
     android:orientation="vertical"
     android:weightSum="7"
-    tools:context="org.androidtown.hyme.MainActivity">s
+    tools:context="org.androidtown.hyme.MainActivity">
 
     <!-- blank -->
     <LinearLayout

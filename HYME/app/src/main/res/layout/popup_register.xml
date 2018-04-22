@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/popup"
+    android:id="@+id/popup_reg"
     android:layout_width="330dp"
     android:layout_height="500dp"
     android:orientation="vertical"
-    android:layout_marginLeft="15dp">
+    android:layout_margin="15dp"
+    android:background="#ffffff">
 
     <!-- Empty -->
     <LinearLayout
@@ -197,7 +198,7 @@
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/bt_go_login"
+            android:id="@+id/bt_register_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/round_shape"
