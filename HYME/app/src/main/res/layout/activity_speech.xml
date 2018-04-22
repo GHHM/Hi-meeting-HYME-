@@ -137,17 +137,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.7"
         android:gravity="center">
 
         <RadioGroup
             android:id="@+id/rg_speech_type"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="4.9">
 
             <RadioButton
                 android:id="@+id/rb_speech_type_1"
@@ -155,15 +155,31 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/dialog_speech_opinion"
-                android:textSize="13dp"></RadioButton>
+                android:textSize="13dp"
+                android:textAlignment="center"
+                android:background="@color/LightGray"
+                android:button="@android:color/transparent"></RadioButton>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"/>
 
             <RadioButton
                 android:id="@+id/rb_speech_type_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2"
+                android:layout_weight="1"
                 android:text="@string/dialog_speech_additional"
-                android:textSize="13dp"></RadioButton>
+                android:textSize="13dp"
+                android:textAlignment="center"
+                android:background="@color/LightGray"
+                android:button="@android:color/transparent"></RadioButton>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"/>
 
             <RadioButton
                 android:id="@+id/rb_speech_type_3"
@@ -171,15 +187,26 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/dialog_speech_ask"
-                android:textSize="13dp"></RadioButton>
+                android:textSize="13dp"
+                android:textAlignment="center"
+                android:background="@color/LightGray"
+                android:button="@android:color/transparent"></RadioButton>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"/>
 
             <RadioButton
                 android:id="@+id/rb_speech_type_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.9"
+                android:layout_weight="1"
                 android:text="@string/dialog_speech_answer"
-                android:textSize="13dp"></RadioButton>
+                android:textSize="13dp"
+                android:textAlignment="center"
+                android:background="@color/LightGray"
+                android:button="@android:color/transparent"></RadioButton>
 
         </RadioGroup>
 

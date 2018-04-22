@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 /**
@@ -15,6 +16,7 @@ public class MeetingRoomActivity extends AppCompatActivity {
 
     ListView lv_meeting_list;
     RoomList roomList;
+    Button bt_go_create;
 
 
     @Override
@@ -29,6 +31,7 @@ public class MeetingRoomActivity extends AppCompatActivity {
 
         lv_meeting_list = (ListView) findViewById(R.id.lv_meeting_list);
         roomList = new RoomList(this);
+        bt_go_create = (Button) findViewById(R.id.bt_go_create);
 
         lv_meeting_list.setAdapter(roomList);
 
@@ -42,6 +45,13 @@ public class MeetingRoomActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+
+        bt_go_create.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(MeetingRoomActivity.this, CreateRoomActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

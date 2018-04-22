@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="0.7"
-            android:id="@+id/bt_go_previous"
+            android:id="@+id/bt_go_create"
             android:background="@drawable/round_shape"
             android:backgroundTint="@color/cleanBlue"
             android:layout_gravity="end"

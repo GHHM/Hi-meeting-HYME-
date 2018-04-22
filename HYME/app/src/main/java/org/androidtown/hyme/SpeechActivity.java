@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -178,9 +179,15 @@ public class SpeechActivity extends AppCompatActivity {
         rg_speech_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                RadioButton one = (RadioButton) findViewById(R.id.rb_speech_type_1);
+                RadioButton two = (RadioButton) findViewById(R.id.rb_speech_type_2);
+                RadioButton three = (RadioButton) findViewById(R.id.rb_speech_type_3);
+                RadioButton four = (RadioButton) findViewById(R.id.rb_speech_type_4);
+
                 switch (i) {
                     case R.id.rb_speech_type_1:
                         typeStatus = 1;
+                        one.setBackgroundResource(R.color.gold);
                         break;
                     case R.id.rb_speech_type_2:
                         typeStatus = 2;
