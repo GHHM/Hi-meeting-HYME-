@@ -3,8 +3,10 @@ package org.androidtown.hyme;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import org.androidtown.hyme.database.DbOpenHelper;
 
 /**
  * Created by HAMHAM on 2017-11-26.
@@ -28,15 +32,43 @@ public class LoginActivity extends AppCompatActivity {
     // For popup view
     private View get_layout;
     private PopupWindow popup;
+    EditText ed_reg_id;
+    Button bt_reg_id_confirm;
+    EditText ed_reg_pw;
+    EditText ed_reg_pw_confirm;
+    EditText ed_reg_name;
+    EditText ed_reg_phone;
+    Button bt_create_register;
+    Button bt_reg_cancel;
+
+    // for creating account
+    String createId;
+    String createPw;
+    String createName;
+    String createPhone;
+
+    // Check the state
+    Boolean dupId = false;
+    Boolean confirmed = false;
+
+    //Database
+    private DbOpenHelper mDBOpenHelper;
+    private Cursor mCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initDatabase();
         initView();
         getRegister();
     }
 
+    public void initDatabase(){
+        mDBOpenHelper = new DbOpenHelper(this);
+        mDBOpenHelper.openDB();
+        mDBOpenHelper.insertColumn_User("user001", "dongmin", "0000", "01000000000");
+    }
 
     public void initView(){
 
@@ -59,32 +91,45 @@ public class LoginActivity extends AppCompatActivity {
         bt_go_login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                //checkId();
-
-                /* For testing!*/
-                justForTest();
+               checkInfo();
 
             }
         });
 
     }
 
-    // For testing!!
-    public void justForTest(){
+    public void checkInfo(){
 
-        if(ed_user_id.getText().toString().equals("user001")){
+        int i=0;
 
-            if(ed_password.getText().toString().equals("0000")){
-                Intent intent = new Intent(LoginActivity.this, MeetingRoomActivity.class);
-                startActivity(intent);
+        while(i<mDBOpenHelper.countUser()){
+            mCursor=mDBOpenHelper.getColumn_User(i);
+
+            if(mCursor.moveToFirst() && mCursor.getCount() >=1 ){
+                if(ed_user_id.getText().toString().equals(mCursor.getString(1))){
+
+                    confirmed=true;
+
+                    // check password
+                    if(ed_password.getText().toString().equals(mCursor.getString(3))){
+                        Intent intent = new Intent(LoginActivity.this, MeetingRoomActivity.class);
+                        Toast.makeText(getApplicationContext(), mCursor.getString(2) + "님, 환영합니다.", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                    }
+
+                    else{
+                        Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다. 다시 입력해주세요", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+
+                }
             }
 
-            else{
-                Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다. 다시 입력해주세요", Toast.LENGTH_LONG).show();
-            }
+            i++;
+
         }
 
-        else{
+        if(!confirmed){
             Toast.makeText(getApplicationContext(), "없는 ID입니다. 다시 입력해주세요", Toast.LENGTH_LONG).show();
         }
 
@@ -92,23 +137,6 @@ public class LoginActivity extends AppCompatActivity {
 
     // For pupup view
     public void getRegister(){
-
-        EditText ed_reg_id;
-        Button bt_reg_id_confirm;
-        EditText ed_reg_pw;
-        final EditText ed_reg_pw_confirm;
-        EditText ed_reg_name;
-        EditText ed_reg_phone;
-        Button bt_register;
-        Button bt_reg_cancel;
-
-        String createId;
-        final String createPw;
-        final String createName;
-        final String createPhone;
-
-        // Check the state
-        final Boolean dupId = false;
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         get_layout = inflater.inflate(R.layout.popup_register, (ViewGroup) findViewById(R.id.popup_reg));
@@ -124,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
         ed_reg_pw_confirm = (EditText) get_layout.findViewById(R.id.ed_register_pw_confirm);
         ed_reg_name = (EditText) get_layout.findViewById(R.id.ed_register_name);
         ed_reg_phone = (EditText) get_layout.findViewById(R.id.ed_register_phone_num);
-        bt_register = (Button) get_layout.findViewById(R.id.bt_register);
+        bt_create_register = (Button) get_layout.findViewById(R.id.bt_register);
         bt_reg_cancel = (Button) get_layout.findViewById(R.id.bt_register_cancel);
 
         createId = ed_reg_id.getText().toString();
@@ -136,27 +164,37 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // check the same ID
-                //Boolean isSame = checkId();
+                Boolean isSame = checkId();
 
-                /*
-                if(!isSame){
+                if(isSame){
                     dupId = true;
+                    Toast.makeText(getApplicationContext(), "ID가 존재합니다.", Toast.LENGTH_LONG).show();
                 }
-                */
+
+                else{
+                    Toast.makeText(getApplicationContext(), "사용가능한 ID입니다.", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
 
-        bt_register.setOnClickListener(new View.OnClickListener(){
+        bt_create_register.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Boolean confirmed = false;
 
+                createPw = ed_reg_pw.getText().toString();
+                createName = ed_reg_name.getText().toString();
+                createPhone = ed_reg_phone.getText().toString();
+
                 // check Id
-                if(dupId){
+                if(!dupId){
+                    Toast.makeText(getApplicationContext(), "is it okay?", Toast.LENGTH_SHORT).show();
                     // check password
                     if((!createPw.isEmpty()) && (createPw.equals(ed_reg_pw_confirm.getText().toString()))){
                         // check name & phone number
+                        Toast.makeText(getApplicationContext(), "is it working?", Toast.LENGTH_SHORT).show();
                         if(!(createName.isEmpty() || createPhone.isEmpty())){
+                            Toast.makeText(getApplicationContext(), "please..", Toast.LENGTH_SHORT).show();
                             confirmed = true;
                         }
                     }
@@ -164,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(confirmed){
 
-                    //saveData();
+                    saveData();
                     Toast.makeText(getApplicationContext(), "가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
                     popup.dismiss();
                 }
@@ -194,6 +232,33 @@ public class LoginActivity extends AppCompatActivity {
                 popup.showAtLocation(get_layout, Gravity.CENTER, OFFSET_X, OFFSET_Y);
             }
         }
+    }
+
+    private void saveData(){
+        Toast.makeText(getApplicationContext(), createId + " " + createName + " " + createPhone, Toast.LENGTH_SHORT).show();
+        mDBOpenHelper.insertColumn_User(createId,createName,createPw,createPhone);
+
+    }
+
+    private Boolean checkId(){
+        createId = ed_reg_id.getText().toString();
+
+        for (int i=0; i <= mDBOpenHelper.countUser();i++){
+            mCursor=mDBOpenHelper.getColumn_User(i);
+
+            // cursor is initialized as -1
+            if(mCursor.moveToFirst() && mCursor.getCount() >= 1) {
+
+                // starts with 1 : user
+                if (createId.equals(mCursor.getString(1))) {
+                    return true;
+                }
+            }
+        }
+
+
+        return false;
+
     }
 
 

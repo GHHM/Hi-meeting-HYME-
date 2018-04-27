@@ -5,6 +5,7 @@
     android:layout_height="500dp"
     android:orientation="vertical"
     android:layout_margin="15dp"
+    android:paddingLeft="5dp"
     android:background="#ffffff">
 
     <!-- Empty -->
@@ -108,9 +109,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
             android:layout_toRightOf="@+id/title"
-            android:textSize="20dp"
             android:layout_weight="5"
-            android:maxLength="10" />
+            android:maxLength="10"
+            android:inputType="textPassword"/>
     </LinearLayout>
 
     <!-- Empty -->
@@ -168,7 +169,7 @@
             android:layout_toRightOf="@+id/title"
             android:textSize="20dp"
             android:layout_weight="5"
-            android:maxLength="10" />
+            android:maxLength="11" />
     </LinearLayout>
 
     <!-- Empty -->

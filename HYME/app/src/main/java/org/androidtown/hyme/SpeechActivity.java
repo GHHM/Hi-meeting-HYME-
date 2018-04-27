@@ -188,15 +188,30 @@ public class SpeechActivity extends AppCompatActivity {
                     case R.id.rb_speech_type_1:
                         typeStatus = 1;
                         one.setBackgroundResource(R.color.gold);
+                        two.setBackgroundResource(R.color.LightGray);
+                        three.setBackgroundResource(R.color.LightGray);
+                        four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_2:
                         typeStatus = 2;
+                        one.setBackgroundResource(R.color.LightGray);
+                        two.setBackgroundResource(R.color.gold);
+                        three.setBackgroundResource(R.color.LightGray);
+                        four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_3:
                         typeStatus = 3;
+                        one.setBackgroundResource(R.color.LightGray);
+                        two.setBackgroundResource(R.color.LightGray);
+                        three.setBackgroundResource(R.color.gold);
+                        four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_4:
                         typeStatus = 4;
+                        one.setBackgroundResource(R.color.LightGray);
+                        two.setBackgroundResource(R.color.LightGray);
+                        three.setBackgroundResource(R.color.LightGray);
+                        four.setBackgroundResource(R.color.gold);
                         break;
                     default:
                         typeStatus = 0;
@@ -234,7 +249,6 @@ public class SpeechActivity extends AppCompatActivity {
 
 
     /* For voice recognition! */
-
     @Override
     protected void onStop() {
         //stopVoiceRecorder();
