@@ -31,7 +31,9 @@
                 android:backgroundTint="@color/cleanBlue"
                 android:background="@drawable/round_shape"
                 android:text="@string/activity_log_share"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:clickable="false"/>
         </LinearLayout>
     </LinearLayout>
 

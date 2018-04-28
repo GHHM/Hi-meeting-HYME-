@@ -18,6 +18,7 @@ public class MeetingRoomActivity extends AppCompatActivity {
     RoomList roomList;
     Button bt_go_create;
 
+    UserInfo mUserInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,9 @@ public class MeetingRoomActivity extends AppCompatActivity {
 
 
     public void initView(){
+        Bundle getBundle = new Bundle();
+        getBundle = getIntent().getExtras();
+        mUserInfo = new UserInfo(getBundle.getString("ID"), getBundle.getString("name"));
 
         lv_meeting_list = (ListView) findViewById(R.id.lv_meeting_list);
         roomList = new RoomList(this);
@@ -42,6 +46,10 @@ public class MeetingRoomActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id){
                 Intent intent = new Intent(MeetingRoomActivity.this, SpeechActivity.class);
+                Bundle myBundle = new Bundle();
+                myBundle.putString("ID", mUserInfo.getID());
+                myBundle.putString("name", mUserInfo.getName());
+                intent.putExtras(myBundle);
                 startActivity(intent);
             }
 

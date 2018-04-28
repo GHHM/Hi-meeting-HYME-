@@ -18,8 +18,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="0.5"
-        android:background="@drawable/round_shape"
-        android:backgroundTint="#717171"
+        android:background="#717171"
         android:gravity="center"
         android:text="@string/activity_speech_ready"
         android:textColor="#ffffff"/>
@@ -51,7 +50,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/activity_speech_speaker_name" />
+            android:id="@+id/tv_speech_speaker"
+            android:text="" />
     </LinearLayout>
 
     <!-- speaker image -->

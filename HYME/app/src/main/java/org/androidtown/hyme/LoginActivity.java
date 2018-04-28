@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
     public void initDatabase(){
         mDBOpenHelper = new DbOpenHelper(this);
         mDBOpenHelper.openDB();
-        mDBOpenHelper.insertColumn_User("user001", "dongmin", "0000", "01000000000");
     }
 
     public void initView(){
@@ -117,7 +116,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     // check password
                     if(ed_password.getText().toString().equals(mCursor.getString(3))){
+                        Bundle myBundle = new Bundle();
+                        myBundle.putString("ID", mCursor.getString(1));
+                        myBundle.putString("name", mCursor.getString(2));
                         Intent intent = new Intent(LoginActivity.this, MeetingRoomActivity.class);
+                        intent.putExtras(myBundle);
                         Toast.makeText(getApplicationContext(), mCursor.getString(2) + "님, 환영합니다.", Toast.LENGTH_LONG).show();
                         startActivity(intent);
                     }
@@ -240,9 +243,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveData(){
-        Toast.makeText(getApplicationContext(), createId + " " + createName + " " + createPhone, Toast.LENGTH_SHORT).show();
         mDBOpenHelper.insertColumn_User(createId,createName,createPw,createPhone);
-
     }
 
     private Boolean checkId(){

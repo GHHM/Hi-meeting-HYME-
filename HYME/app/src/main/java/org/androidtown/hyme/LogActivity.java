@@ -1,6 +1,7 @@
 package org.androidtown.hyme;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+
+import org.androidtown.hyme.database.DbOpenHelper;
 
 /**
  * Created by Master on 2017-12-11.
@@ -25,21 +28,29 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
     ListView lv_participant_log;
     Button bt_go_previous;
 
+    UserInfo mUserInfo;
+    int countTable = 0;
+
+    DbOpenHelper mDBOpenHelper;
+    Cursor mCursor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+        initDatabase();
         initView();
+    }
+
+    public void initDatabase(){
+        mDBOpenHelper = new DbOpenHelper(this);
+        mDBOpenHelper.openDB();
     }
 
     public void initView() {
         Bundle getBundle = new Bundle();
         getBundle = getIntent().getExtras();
-        String data = getBundle.getString("data");
-        int type = getBundle.getInt("type");
-        String getType="";
-
-
+        mUserInfo = new UserInfo(getBundle.getString("ID"), getBundle.getString("name"));
 
         bt_share = (Button) findViewById(R.id.bt_share);
         bt_go_previous = (Button) findViewById(R.id.bt_go_previous);
@@ -53,33 +64,12 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         logList = new LogList(this);
 
         /* Get Data */
-        //getData();
-
-
-        switch(type){
-            case 1:
-                getType="의견";
-                break;
-            case 2:
-                getType="추가";
-                break;
-            case 3:
-                getType="질문";
-                break;
-            case 4:
-                getType="답변";
-                break;
-        }
-
-
-
-
+        getData();
 
         /* Temporal setting */
-        logList.addItem(1, "홍길동", getType, data);
-        logList.addItem(2, "김혜미", "추가", "그와 관련된 보도 자료가 있습니다. 다음을 참고하시면...");
-        logList.addItem(3, "김단우", "질문", "외국에서는 우리나라의 효도법과 비슷한 제도가...");
-        logList.addItem(4, "박동민", "의견", "홍길동씨와 다르게, 저는 부양의무에 대해서 이렇게 생각하는데...");
+        logList.addItem(countTable, "김혜미", "추가", "그와 관련된 보도 자료가 있습니다. 다음을 참고하시면...");
+        logList.addItem(countTable+1, "김단우", "질문", "외국에서는 우리나라의 효도법과 비슷한 제도가...");
+        logList.addItem(countTable+2, "박동민", "의견", "홍길동씨와 다르게, 저는 부양의무에 대해서 이렇게 생각하는데...");
 
         cb_type_opinion.setOnCheckedChangeListener(this);
         cb_type_additional.setOnCheckedChangeListener(this);
@@ -190,6 +180,22 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
             }
         }
 
+    }
+
+    // get conference data
+    public void getData(){
+        int i=0;
+
+        while(i<mDBOpenHelper.countUser()){
+            mCursor=mDBOpenHelper.getColumn_Speech(i);
+
+            if(mCursor.moveToFirst() && mCursor.getCount() >=1 ){
+               logList.addItem(countTable, mCursor.getString(1), mCursor.getString(2), mCursor.getString(3));
+            }
+
+            i++;
+            countTable++;
+        }
     }
 
 

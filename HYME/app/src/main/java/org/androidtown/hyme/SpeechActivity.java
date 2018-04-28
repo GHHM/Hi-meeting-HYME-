@@ -18,6 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.androidtown.hyme.database.DbOpenHelper;
+
 /**
  * Created by Master on 2017-12-06.
  */
@@ -29,16 +31,22 @@ public class SpeechActivity extends AppCompatActivity {
     Button bt_show_log;
     TextView tv_voice_recog_result;
     TextView tv_speak_type;
+    TextView tv_speech_speaker;
     RadioGroup rg_speech_type;
 
     // set speech type
     int typeStatus = 0;
-    int saveStatus = 0;
+    String saveStatus="";
 
     // Save string
     String saveString = "";
-    String bundleString = "";
+    String speechContent = "";
 
+    //Database
+    DbOpenHelper mDBOpenHelper;
+
+    // user information
+    UserInfo mUserInfo;
 
     // voice recognition
     public static final String TAG = "SpeechActivity";
@@ -100,12 +108,25 @@ public class SpeechActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech);
+
+        Bundle getBundle = new Bundle();
+        getBundle = getIntent().getExtras();
+        mUserInfo = new UserInfo(getBundle.getString("ID"), getBundle.getString("name"));
+
+        initDatabase();
         initView();
+    }
+
+    public void initDatabase(){
+        mDBOpenHelper = new DbOpenHelper(this);
+        mDBOpenHelper.openDB();
     }
 
     public void initView() {
         tv_voice_recog_result = (TextView) findViewById(R.id.tv_voice_recog_result);
         tv_speak_type = (TextView) findViewById(R.id.tv_speak_type);
+        tv_speech_speaker = (TextView) findViewById(R.id.tv_speech_speaker);
+        tv_speech_speaker.setText(mUserInfo.getName());
 
         speechAPI = new SpeechAPI(SpeechActivity.this);
 
@@ -154,18 +175,21 @@ public class SpeechActivity extends AppCompatActivity {
                     bt_start_voice_recog.setText(getResources().getString(R.string.activity_speech_want));
 
                     if(typeStatus != 0){
-                        saveStatus = typeStatus;
+                        saveStatus = tv_speak_type.getText().toString();
                     }
 
                     typeStatus = 0;
                     tv_speak_type.setText(getResources().getString(R.string.activity_speech_ready));
-                    tv_speak_type.setBackgroundColor(getResources().getColor(R.color.littleDark));
+                    tv_speak_type.setBackgroundColor(Color.parseColor("#717171"));
 
-                    Toast.makeText(getApplicationContext(), "발언을 로그에 저장했습니다.", Toast.LENGTH_SHORT);
-                    bundleString = saveString;
+                    Toast.makeText(getApplicationContext(), "발언을 로그에 저장했습니다.", Toast.LENGTH_SHORT).show();
+                    speechContent = saveString;
 
-                    /* send data */
-                    //sendData(saveString);
+                    for(int i=0; i<rg_speech_type.getChildCount(); i++){
+                        rg_speech_type.getChildAt(i).setBackgroundResource(R.color.LightGray);
+                    }
+
+                    saveData();
 
                     stopVoiceRecorder();
 
@@ -224,8 +248,8 @@ public class SpeechActivity extends AppCompatActivity {
         bt_go_participant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Bundle myBundle =  new Bundle();
-                myBundle.putInt("type", saveStatus);
-                myBundle.putString("data", bundleString);
+                myBundle.putString("ID", mUserInfo.getID());
+                myBundle.putString("name", mUserInfo.getName());
                 Intent intent = new Intent(SpeechActivity.this, ParticipantActivity.class);
                 intent.putExtras(myBundle);
                 startActivity(intent);
@@ -236,14 +260,20 @@ public class SpeechActivity extends AppCompatActivity {
         bt_show_log.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Bundle myBundle =  new Bundle();
-                myBundle.putInt("type", saveStatus);
-                myBundle.putString("data", bundleString);
+                myBundle.putString("ID", mUserInfo.getID());
+                myBundle.putString("name", mUserInfo.getName());
                 Intent intent = new Intent(SpeechActivity.this, LogActivity.class);
                 intent.putExtras(myBundle);
                 startActivity(intent);
             }
         });
 
+    }
+
+    // Save data to database
+    private void saveData(){
+        Log.i("aaaa", mUserInfo.getName() + ", " + saveStatus + ", " +  speechContent);
+        mDBOpenHelper.insertColumn_Speech(mUserInfo.getName(), saveStatus, speechContent);
     }
 
 
