@@ -105,7 +105,7 @@
     <ListView
         android:id="@+id/lv_create_participant_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="20"/>
 
     <!-- Empty -->
@@ -159,26 +159,120 @@
         android:gravity="center_vertical"
         android:weightSum="4">
 
-        <!-- need calenderview -->
+        <!-- need timepicker -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:id="@+id/ll_create_room_time">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/activity_create_time"/>
+                android:gravity="center_vertical"
+                android:text="@string/activity_create_am"
+                android:id="@+id/tv_create_room_ampm"/>
 
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/activity_create_time_def"
+                android:id="@+id/ed_create_room_hour"
+                android:inputType="time"
+                android:contextClickable="true"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/activity_create_hour"/>
+
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/activity_create_time_def"
+                android:id="@+id/ed_create_room_minute"
+                android:inputType="time"
+                android:clickable="true"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/activity_create_minute"/>
         </LinearLayout>
 
 
-        <!-- need timeview-->
+        <!-- need date picker -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:gravity="center"
+            android:id="@+id/ll_create_room_date"
+            android:clickable="true"
+            android:focusable="true">
+
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/activity_create_year_def"
+                android:id="@+id/ed_create_room_year"
+                android:inputType="date"
+                android:clickable="true"
+                android:maxLength="4"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/activity_create_year"/>
+
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/activity_create_time_def"
+                android:id="@+id/ed_create_room_month"
+                android:inputType="date"
+                android:clickable="true"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/activity_create_month"/>
+
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/activity_create_time_def"
+                android:id="@+id/ed_create_room_day"
+                android:inputType="date"
+                android:clickable="true"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/activity_create_day"/>
 
         </LinearLayout>
 

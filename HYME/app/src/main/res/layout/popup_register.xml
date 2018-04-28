@@ -85,7 +85,8 @@
             android:layout_toRightOf="@+id/title"
             android:layout_weight="5"
             android:hint="@string/popup_register_pw_msg"
-            android:maxLength="10" />
+            android:maxLength="10"
+            android:inputType="textPassword"/>
     </LinearLayout>
 
     <!-- confirm password -->

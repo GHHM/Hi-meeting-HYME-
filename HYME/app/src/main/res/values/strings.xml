@@ -100,6 +100,8 @@
     <string name="activity_create_minute">분</string>
     <string name="activity_create_am">오전</string>
     <string name="activity_create_pm">오후</string>
+    <string name="activity_create_time_def">00</string>
+    <string name="activity_create_year_def">0000</string>
 
 
 </resources>
