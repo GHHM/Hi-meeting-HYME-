@@ -13,35 +13,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"></LinearLayout>
+        android:layout_weight="1"></LinearLayout>
 
-    <!-- content -->
+    <!-- image -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="3.5"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:weightSum="3"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:layout_weight="1.9"
+            android:background="@drawable/hyme_mic"></LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"/>
 
         <!-- title -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="90dp"
                 android:gravity="center"
-                android:text="@string/activity_main_title"
-                android:textSize="30dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/activity_main_title_acronym" />
+                android:background="@drawable/hyme_logo" />
 
         </LinearLayout>
 
@@ -49,56 +55,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5">
+            android:layout_weight="0.5"
+            android:gravity="center">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
                 android:gravity="center"
-                android:text="@string/activity_main_title_description"/>
-        </LinearLayout>
-
-        <!-- Kakao login-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:layout_weight="0.5">
-
-            <Button
-                android:id="@+id/bt_kakaoLogin"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:background="@drawable/kakao_login"
-                />
-        </LinearLayout>
-
-        <!-- HYME login -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:layout_weight="0.5">
-
-            <Button
-                android:id="@+id/bt_hymeLogin"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:text="@string/activity_main_login"
-                android:textSize="15dp"
-                android:textColor="#ffffff"
-                android:background="@drawable/round_shape"
-                android:backgroundTint="@color/cleanBlue"/>
+                android:background="@drawable/hyme_acro"/>
         </LinearLayout>
 
 
 
     </LinearLayout>
 
-    <!-- blank -->
+    <!-- description -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"></LinearLayout>
+        android:layout_weight="1"
+        android:gravity="center">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/activity_main_title_description"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
+        android:layout_gravity="center"
+        android:background="@drawable/meeting"></LinearLayout>
 
 </LinearLayout>
