@@ -23,13 +23,15 @@ public final class Databases {
         public static final String CONFERENCE_NAME = "conference_name";
         public static final String PARTICIPANTS = "participants";
         public static final String START_TIME = "start_time";
+        public static final String START_DATE = "start_date";
         public static final String _TABLE_NAME = "ConferenceDatabase";
         public static final String _CREATE =
                 "create table "+_TABLE_NAME+"("
                         +_ID+" integer primary key autoincrement, "
                         +CONFERENCE_NAME+" text not null , "
                         +PARTICIPANTS+" text not null , "
-                        +START_TIME+" text not null  ); ";
+                        +START_TIME+" text not null  ,"
+                        +START_DATE+" text not null  ); ";
     }
 
     public static final class SpeechDatabaseUtil implements BaseColumns {

@@ -28,6 +28,7 @@
     <string name="activity_speech_log">로그</string>
     <string name="activity_speech_status">진행 상황</string>
     <string name="activity_speech_ready">준비중..</string>
+    <string name="activity_speech_formal">이전 발언 :</string>
 
     <!-- speech request dialog -->
     <string name="dialog_request_speech_content">아무개 님께서 발언권을 요청하였습니다.</string>
@@ -56,7 +57,7 @@
     <string name="activity_participant_waating_list">코난, 남도일, 김전일</string>
 
     <!-- log activity -->
-    <string name="activity_log_title">Show log</string>
+    <string name="activity_log_title">회의 로그</string>
     <string name="activity_log_message">보고싶은 대화 종류를 선택하세요.</string>
     <string name="activity_log_share">공유</string>
 
@@ -87,7 +88,8 @@
     <string name="activity_create_name">제목</string>
     <string name="activity_create_participant_num">참여인원</string>
     <string name="activity_create_participant_list">참여자 목록</string>
-    <string name="activity_create_participant_add">참여자 추가</string>
+    <string name="activity_create_participant_add">추가</string>
+    <string name="activity_create_participant_search">찾기</string>
     <string name="activity_create_time">시작일자</string>
     <string name="activity_create_current_time">현재 시간으로 지정</string>
     <string name="activity_create_alarm">알림설정</string>
@@ -102,6 +104,12 @@
     <string name="activity_create_pm">오후</string>
     <string name="activity_create_time_def">00</string>
     <string name="activity_create_year_def">0000</string>
+
+    <!-- speech detail activity -->
+    <string name="activity_detail_title">세부 내용</string>
+    <string name="activity_detail_speecher">발언자 :</string>
+    <string name="activity_detail_type">발언 종류 :</string>
+    <string name="activity_detail_content">내용 :</string>
 
 
 </resources>

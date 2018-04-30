@@ -33,20 +33,28 @@ public class SpeechActivity extends AppCompatActivity {
     TextView tv_speak_type;
     TextView tv_speech_speaker;
     RadioGroup rg_speech_type;
+    TextView tv_speech_formal_name;
+    TextView tv_speech_formal_content;
 
     // set speech type
     int typeStatus = 0;
-    String saveStatus="";
+    String saveStatus = "";
 
     // Save string
     String saveString = "";
     String speechContent = "";
+
+    // count listener time
+    int listened = 0;
 
     //Database
     DbOpenHelper mDBOpenHelper;
 
     // user information
     UserInfo mUserInfo;
+
+    // speech analysis
+    SpeechAlgorithm mSpeechAlgorithm;
 
     // voice recognition
     public static final String TAG = "SpeechActivity";
@@ -96,6 +104,41 @@ public class SpeechActivity extends AppCompatActivity {
                                     Log.i("aaa", "or got here");
                                     Log.i("aaa", text);
                                     tv_voice_recog_result.setText(saveString + text);
+
+                                    // Analyze text if is not answer or question
+                                    if((typeStatus != 4) && (typeStatus !=3)) {
+
+                                        // Decide the type in 20 listener times
+                                        if (listened <= 20) {
+                                            typeStatus = mSpeechAlgorithm.analyzeText(tv_voice_recog_result.getText().toString());
+                                            mSpeechAlgorithm.setType(typeStatus);
+                                        }
+                                    }
+
+                                    switch (typeStatus) {
+                                        case 1:
+                                            tv_speak_type.setText(getResources().getString(R.string.dialog_speech_opinion));
+                                            tv_speak_type.setBackgroundColor(Color.parseColor("#FFD700"));
+                                            break;
+                                        case 2:
+                                            tv_speak_type.setText(getResources().getString(R.string.dialog_speech_additional));
+                                            tv_speak_type.setBackgroundColor(Color.parseColor("#63b2f7"));
+                                            break;
+                                        case 3:
+                                            tv_speak_type.setText(getResources().getString(R.string.dialog_speech_ask));
+                                            tv_speak_type.setBackgroundColor(Color.parseColor("#32CD32"));
+                                            break;
+                                        case 4:
+                                            tv_speak_type.setText(getResources().getString(R.string.dialog_speech_answer));
+                                            tv_speak_type.setBackgroundColor(Color.parseColor("#FF0000"));
+                                            break;
+                                        case 5:
+                                            tv_speak_type.setText("기타");
+                                            tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+                                    }
+
+                                    listened++;
+                                    Log.i("aaa", listened + "");
                                 }
                             }
                         });
@@ -113,11 +156,13 @@ public class SpeechActivity extends AppCompatActivity {
         getBundle = getIntent().getExtras();
         mUserInfo = new UserInfo(getBundle.getString("ID"), getBundle.getString("name"));
 
+        mSpeechAlgorithm = new SpeechAlgorithm();
+
         initDatabase();
         initView();
     }
 
-    public void initDatabase(){
+    public void initDatabase() {
         mDBOpenHelper = new DbOpenHelper(this);
         mDBOpenHelper.openDB();
     }
@@ -126,9 +171,9 @@ public class SpeechActivity extends AppCompatActivity {
         tv_voice_recog_result = (TextView) findViewById(R.id.tv_voice_recog_result);
         tv_speak_type = (TextView) findViewById(R.id.tv_speak_type);
         tv_speech_speaker = (TextView) findViewById(R.id.tv_speech_speaker);
+        tv_speech_formal_name = (TextView) findViewById(R.id.tv_speech_formal_name);
+        tv_speech_formal_content = (TextView) findViewById(R.id.tv_speech_formal_content);
         tv_speech_speaker.setText(mUserInfo.getName());
-
-        speechAPI = new SpeechAPI(SpeechActivity.this);
 
         bt_start_voice_recog = (Button) findViewById(R.id.bt_start_voice_recog);
         bt_start_voice_recog.setOnClickListener(new View.OnClickListener() {
@@ -137,46 +182,59 @@ public class SpeechActivity extends AppCompatActivity {
                 if (bt_start_voice_recog.getText().toString() == getResources().getString(R.string.activity_speech_want)) {
                     Log.i("aaa", "started");
 
-                    if (typeStatus == 0) {
-                        Toast.makeText(getApplicationContext(), "발언 종류 선택 후 눌러주시기 바랍니다.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (isGrantedPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
-                            Log.i("aaa", "where are you");
-                            bt_start_voice_recog.setText(getResources().getString(R.string.activity_speech_ongoing));
-                            startVoiceRecorder();
-                            speechAPI.addListener(mSpeechServiceListener);
+                    tv_speak_type.setText("발언 예측중..");
+                    speechAPI = new SpeechAPI(SpeechActivity.this);
 
-                            switch (typeStatus) {
-                                case 1:
-                                    tv_speak_type.setText(getResources().getString(R.string.dialog_speech_opinion));
-                                    tv_speak_type.setBackgroundColor(Color.parseColor("#FFD700"));
-                                    break;
-                                case 2:
-                                    tv_speak_type.setText(getResources().getString(R.string.dialog_speech_additional));
-                                    tv_speak_type.setBackgroundColor(Color.parseColor("#63b2f7"));
-                                    break;
-                                case 3:
-                                    tv_speak_type.setText(getResources().getString(R.string.dialog_speech_ask));
-                                    tv_speak_type.setBackgroundColor(Color.parseColor("#32CD32"));
-                                    break;
-                                case 4:
-                                    tv_speak_type.setText(getResources().getString(R.string.dialog_speech_answer));
-                                    tv_speak_type.setBackgroundColor(Color.parseColor("#FF0000"));
-                                    break;
-                            }
-                        } else {
-                            Log.i("aaa", "are you here");
-                            Toast.makeText(getApplicationContext(), "오디오 접근 허용 승인 후 사용해 주시기 바랍니다.", Toast.LENGTH_LONG).show();
-                            makeRequest(Manifest.permission.RECORD_AUDIO);
-                        }
+                    // Analyze formal type
+                    typeStatus = mSpeechAlgorithm.analyzeType();
+
+                    if (isGrantedPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                        Log.i("aaa", "where are you");
+                        bt_start_voice_recog.setText(getResources().getString(R.string.activity_speech_ongoing));
+                        startVoiceRecorder();
+                        speechAPI.addListener(mSpeechServiceListener);
+
+                        /*
+                        switch (typeStatus) {
+                            case 1:
+                                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_opinion));
+                                tv_speak_type.setBackgroundColor(Color.parseColor("#FFD700"));
+                                break;
+                            case 2:
+                                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_additional));
+                                tv_speak_type.setBackgroundColor(Color.parseColor("#63b2f7"));
+                                break;
+                            case 3:
+                                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_ask));
+                                tv_speak_type.setBackgroundColor(Color.parseColor("#32CD32"));
+                                break;
+                            case 4:
+                                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_answer));
+                                tv_speak_type.setBackgroundColor(Color.parseColor("#FF0000"));
+                                break;
+                            case 5:
+                                tv_speak_type.setText("기타");
+                                tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+
+                        }*/
+                    } else {
+                        Log.i("aaa", "are you here");
+                        Toast.makeText(getApplicationContext(), "오디오 접근 허용 승인 후 사용해 주시기 바랍니다.", Toast.LENGTH_LONG).show();
+                        makeRequest(Manifest.permission.RECORD_AUDIO);
                     }
+
 
                 } else if (bt_start_voice_recog.getText().toString() == getResources().getString(R.string.activity_speech_ongoing)) {
                     bt_start_voice_recog.setText(getResources().getString(R.string.activity_speech_want));
 
-                    if(typeStatus != 0){
+                    if (typeStatus != 0) {
                         saveStatus = tv_speak_type.getText().toString();
                     }
+
+                    // Save formal information
+                    tv_speech_formal_name.setText(tv_speech_speaker.getText().toString() + " (" + tv_speak_type.getText().toString() + ")");
+                    tv_speech_formal_content.setText(saveString);
+                    mSpeechAlgorithm.setType(typeStatus);
 
                     typeStatus = 0;
                     tv_speak_type.setText(getResources().getString(R.string.activity_speech_ready));
@@ -184,8 +242,11 @@ public class SpeechActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "발언을 로그에 저장했습니다.", Toast.LENGTH_SHORT).show();
                     speechContent = saveString;
+                    saveString = "";
+                    listened = 0;
+                    tv_voice_recog_result.setText(saveString);
 
-                    for(int i=0; i<rg_speech_type.getChildCount(); i++){
+                    for (int i = 0; i < rg_speech_type.getChildCount(); i++) {
                         rg_speech_type.getChildAt(i).setBackgroundResource(R.color.LightGray);
                     }
 
@@ -211,31 +272,55 @@ public class SpeechActivity extends AppCompatActivity {
                 switch (i) {
                     case R.id.rb_speech_type_1:
                         typeStatus = 1;
-                        one.setBackgroundResource(R.color.gold);
+                        if (one.isChecked())
+                            one.setBackgroundResource(R.color.gold);
+                        else {
+                            one.setBackgroundResource(R.color.LightGray);
+                            tv_speak_type.setText("기타");
+                            tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+                        }
                         two.setBackgroundResource(R.color.LightGray);
                         three.setBackgroundResource(R.color.LightGray);
                         four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_2:
                         typeStatus = 2;
+                        if (two.isChecked())
+                            two.setBackgroundResource(R.color.gold);
+                        else {
+                            two.setBackgroundResource(R.color.LightGray);
+                            tv_speak_type.setText("기타");
+                            tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+                        }
                         one.setBackgroundResource(R.color.LightGray);
-                        two.setBackgroundResource(R.color.gold);
                         three.setBackgroundResource(R.color.LightGray);
                         four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_3:
                         typeStatus = 3;
+                        if (three.isChecked())
+                            three.setBackgroundResource(R.color.gold);
+                        else {
+                            three.setBackgroundResource(R.color.LightGray);
+                            tv_speak_type.setText("기타");
+                            tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+                        }
                         one.setBackgroundResource(R.color.LightGray);
                         two.setBackgroundResource(R.color.LightGray);
-                        three.setBackgroundResource(R.color.gold);
                         four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_4:
                         typeStatus = 4;
+                        if (four.isChecked())
+                            four.setBackgroundResource(R.color.gold);
+                        else {
+                            four.setBackgroundResource(R.color.LightGray);
+                            tv_speak_type.setText("기타");
+                            tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+                        }
                         one.setBackgroundResource(R.color.LightGray);
                         two.setBackgroundResource(R.color.LightGray);
                         three.setBackgroundResource(R.color.LightGray);
-                        four.setBackgroundResource(R.color.gold);
                         break;
                     default:
                         typeStatus = 0;
@@ -244,10 +329,13 @@ public class SpeechActivity extends AppCompatActivity {
             }
         });
 
+        // when type changed
+
+
         bt_go_participant = (Button) findViewById(R.id.bt_show_status);
         bt_go_participant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Bundle myBundle =  new Bundle();
+                Bundle myBundle = new Bundle();
                 myBundle.putString("ID", mUserInfo.getID());
                 myBundle.putString("name", mUserInfo.getName());
                 Intent intent = new Intent(SpeechActivity.this, ParticipantActivity.class);
@@ -259,7 +347,7 @@ public class SpeechActivity extends AppCompatActivity {
         bt_show_log = (Button) findViewById(R.id.bt_show_log);
         bt_show_log.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Bundle myBundle =  new Bundle();
+                Bundle myBundle = new Bundle();
                 myBundle.putString("ID", mUserInfo.getID());
                 myBundle.putString("name", mUserInfo.getName());
                 Intent intent = new Intent(SpeechActivity.this, LogActivity.class);
@@ -271,11 +359,10 @@ public class SpeechActivity extends AppCompatActivity {
     }
 
     // Save data to database
-    private void saveData(){
-        Log.i("aaaa", mUserInfo.getName() + ", " + saveStatus + ", " +  speechContent);
+    private void saveData() {
+        Log.i("aaaa", mUserInfo.getName() + ", " + saveStatus + ", " + speechContent);
         mDBOpenHelper.insertColumn_Speech(mUserInfo.getName(), saveStatus, speechContent);
     }
-
 
 
     /* For voice recognition! */

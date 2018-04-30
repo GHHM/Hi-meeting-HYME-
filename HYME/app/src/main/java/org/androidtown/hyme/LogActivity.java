@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.androidtown.hyme.database.DbOpenHelper;
 
@@ -88,6 +90,23 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         bt_go_previous.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        lv_participant_log.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView temp_name = (TextView) view.findViewById(R.id.tv_log_name);
+                TextView temp_type = (TextView) view.findViewById(R.id.tv_log_type);
+                TextView temp_content = (TextView) view.findViewById(R.id.tv_log_content);
+
+                Bundle myBundle = new Bundle();
+                myBundle.putString("speaker", temp_name.getText().toString());
+                myBundle.putString("type", temp_type.getText().toString());
+                myBundle.putString("content", temp_content.getText().toString());
+                Intent intent = new Intent(LogActivity.this, SpeechDetailActivity.class);
+                intent.putExtras(myBundle);
+                startActivity(intent);
             }
         });
 

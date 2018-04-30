@@ -96,11 +96,12 @@ public class DbOpenHelper {
         return mDB.insert(Databases.UserDatabaseUtil._TABLE_NAME, null, values);
     }
 
-    public long insertColumn_Con(String _conferenceName, String _participants, String _startTime){
+    public long insertColumn_Con(String _conferenceName, String _participants, String _startTime, String _startDate){
         ContentValues values = new ContentValues();
         values.put(Databases.ConferenceDatabaseUtil.CONFERENCE_NAME, _conferenceName);
         values.put(Databases.ConferenceDatabaseUtil.PARTICIPANTS, _participants);
         values.put(Databases.ConferenceDatabaseUtil.START_TIME, _startTime);
+        values.put(Databases.ConferenceDatabaseUtil.START_DATE, _startDate);
         return mDB.insert(Databases.ConferenceDatabaseUtil._TABLE_NAME, null, values);
     }
 
@@ -122,11 +123,12 @@ public class DbOpenHelper {
         return mDB.update(Databases.UserDatabaseUtil._TABLE_NAME, values, "USER_ID="+_userId, null)>0;
     }
 
-    public boolean updateColumn_Con(String _conferenceName, String _participants, String _startTime){
+    public boolean updateColumn_Con(String _conferenceName, String _participants, String _startTime, String _startDate){
         ContentValues values = new ContentValues();
         values.put(Databases.ConferenceDatabaseUtil.CONFERENCE_NAME, _conferenceName);
         values.put(Databases.ConferenceDatabaseUtil.PARTICIPANTS, _participants);
         values.put(Databases.ConferenceDatabaseUtil.START_TIME, _startTime);
+        values.put(Databases.ConferenceDatabaseUtil.START_DATE, _startDate);
         return mDB.update(Databases.ConferenceDatabaseUtil._TABLE_NAME, values, "CONFERENCE_NAME="+_conferenceName, null)>0;
     }
 

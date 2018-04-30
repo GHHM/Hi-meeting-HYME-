@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(), "HYME에 오신것을 환영합니다 ^^", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "HYME를 방문해주셔서 감사합니다 ^^", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }, 3000);
