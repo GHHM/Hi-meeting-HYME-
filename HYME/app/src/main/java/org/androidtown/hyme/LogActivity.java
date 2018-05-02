@@ -27,6 +27,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
     CheckBox cb_type_additional;
     CheckBox cb_type_ask;
     CheckBox cb_type_answer;
+    CheckBox cb_type_etc;
     ListView lv_participant_log;
     Button bt_go_previous;
 
@@ -62,6 +63,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         cb_type_additional = (CheckBox) findViewById(R.id.cb_type_additional);
         cb_type_ask = (CheckBox) findViewById(R.id.cb_type_ask);
         cb_type_answer = (CheckBox) findViewById(R.id.cb_type_answer);
+        cb_type_etc = (CheckBox) findViewById(R.id.cb_type_etc);
 
         logList = new LogList(this);
 
@@ -79,6 +81,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         cb_type_additional.setOnCheckedChangeListener(this);
         cb_type_ask.setOnCheckedChangeListener(this);
         cb_type_answer.setOnCheckedChangeListener(this);
+        cb_type_etc.setOnCheckedChangeListener(this);
 
         bt_share.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -102,6 +105,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                 TextView temp_content = (TextView) view.findViewById(R.id.tv_log_content);
 
                 Bundle myBundle = new Bundle();
+                myBundle.putString("title", mConferInfo.getTitle());
                 myBundle.putString("speaker", temp_name.getText().toString());
                 myBundle.putString("type", temp_type.getText().toString());
                 myBundle.putString("content", temp_content.getText().toString());
@@ -140,6 +144,12 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
             checkView(4, false);
         }
 
+        if(cb_type_etc.isChecked()){
+            checkView(5, true);
+        } else {
+            checkView(5, false);
+        }
+
     }
 
     private void checkView(int check, boolean isVisible) {
@@ -170,6 +180,11 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                             lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
                         }
                         break;
+                    case 5:
+                        if(logList.printType(i).equals(cb_type_etc.getText().toString())){
+                            lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
+                        }
+                        break;
                 }
             }
 
@@ -193,6 +208,11 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                         break;
                     case 4:
                         if(logList.printType(i).equals(cb_type_answer.getText().toString())) {
+                            lv_participant_log.getChildAt(i).setVisibility(View.GONE);
+                        }
+                        break;
+                    case 5:
+                        if(logList.printType(i).equals(cb_type_etc.getText().toString())){
                             lv_participant_log.getChildAt(i).setVisibility(View.GONE);
                         }
                         break;

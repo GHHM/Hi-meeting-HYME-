@@ -149,7 +149,7 @@ public class DbOpenHelper {
         values.put(Databases.SpeechDatabaseUtil.USER_NAME, _userName);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_TYPE, _speechType);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_CONTENT, _speechContent);
-        return mDB.update(Databases.SpeechDatabaseUtil._TABLE_NAME,values, "USER_NAME="+_userName, null)>0;
+        return mDB.update(Databases.SpeechDatabaseUtil._TABLE_NAME,values, "CONFERENCE_NAME="+_conferenceName+",USER_NAME="+_userName+",SPEECH_TYPE="+_speechType,null)>0;
     }
 
     // ID 컬럼 얻어 오기

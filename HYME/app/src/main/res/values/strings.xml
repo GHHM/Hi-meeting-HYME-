@@ -112,6 +112,8 @@
     <string name="activity_detail_speecher">발언자 :</string>
     <string name="activity_detail_type">발언 종류 :</string>
     <string name="activity_detail_content">내용 :</string>
+    <string name="activity_detail_save">저장</string>
+    <string name="activity_detail_cancel">취소</string>
 
 
 </resources>
