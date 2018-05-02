@@ -46,6 +46,7 @@ public class RoomList extends BaseAdapter {
             vh.roomImage =  (ImageView) convertView.findViewById(R.id.iv_room_image);
             vh.roomTitle = (TextView) convertView.findViewById(R.id.tv_room_title);
             vh.roomMember = (TextView) convertView.findViewById(R.id.tv_room_member);
+            vh.roomDate = (TextView) convertView.findViewById(R.id.tv_room_date);
             vh.roomTime = (TextView) convertView.findViewById(R.id.tv_room_time);
             vh.roomImageIdk = (ImageView) convertView.findViewById(R.id.tv_room_image_idk);
             convertView.setTag(vh);
@@ -58,16 +59,18 @@ public class RoomList extends BaseAdapter {
         vh.roomImage.setImageResource(R.drawable.speaker);
         vh.roomTitle.setText(itemData.getTitle);
         vh.roomMember.setText(itemData.getMember);
+        vh.roomDate.setText(itemData.getDate);
         vh.roomTime.setText(itemData.getTime);
         vh.roomImageIdk.setImageResource(R.drawable.points);
         return convertView;
     }
 
-    void addItem(String title, String member, String time){
+    void addItem(String title, String member, String date, String time){
         ItemData itemData = new ItemData();
         itemData.getTitle = title;
         itemData.getMember = member;
         itemData.getTime = time;
+        itemData.getDate = date;
         itemList.add(itemData);
     }
 
@@ -83,11 +86,16 @@ public class RoomList extends BaseAdapter {
         return itemList.get(i).getTime;
     }
 
+    String printDate(int i){
+        return itemList.get(i).getDate;
+    }
+
     private class ViewHolder {
         ImageView roomImage;
         TextView roomTitle;
         TextView roomMember;
         TextView roomTime;
+        TextView roomDate;
         ImageView roomImageIdk;
     }
 
@@ -95,6 +103,7 @@ public class RoomList extends BaseAdapter {
         String getTitle;
         String getMember;
         String getTime;
+        String getDate;
     }
 
 }

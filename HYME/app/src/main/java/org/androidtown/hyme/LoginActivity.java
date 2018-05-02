@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     // Check the state
     Boolean dupId = false;
     Boolean confirmed = false;
+    Boolean clicked = false;
 
     //Database
     private DbOpenHelper mDBOpenHelper;
@@ -69,12 +70,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void initDatabase(){
+    public void initDatabase() {
         mDBOpenHelper = new DbOpenHelper(this);
         mDBOpenHelper.openDB();
     }
 
-    public void initView(){
+    public void initView() {
 
         ed_user_id = (EditText) findViewById(R.id.ed_user_id);
         ed_password = (EditText) findViewById(R.id.ed_password);
@@ -85,37 +86,40 @@ public class LoginActivity extends AppCompatActivity {
         ed_user_id.setFocusableInTouchMode(true);
 
 
-        bt_register.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        bt_register.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
                 showPopup(LoginActivity.this, 1);
             }
         });
 
-        bt_go_login.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        bt_go_login.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
-               checkInfo();
+                checkInfo();
 
             }
         });
 
     }
 
-    public void checkInfo(){
+    public void checkInfo() {
 
-        int i=0;
+        int i = 0;
 
-        while(i<mDBOpenHelper.countUser()){
-            mCursor=mDBOpenHelper.getColumn_User(i);
+        while (i <= mDBOpenHelper.countUser()) {
+            mCursor = mDBOpenHelper.getColumn_User(i);
 
-            if(mCursor.moveToFirst() && mCursor.getCount() >=1 ){
-                if(ed_user_id.getText().toString().equals(mCursor.getString(1))){
+            if (mCursor.moveToFirst() && mCursor.getCount() >= 1) {
 
-                    confirmed=true;
+                Log.i("findID", i + " " + mCursor.getString(1));
+
+                if (ed_user_id.getText().toString().equals(mCursor.getString(1))) {
+
+                    confirmed = true;
 
                     // check password
-                    if(ed_password.getText().toString().equals(mCursor.getString(3))){
+                    if (ed_password.getText().toString().equals(mCursor.getString(3))) {
                         Bundle myBundle = new Bundle();
                         myBundle.putString("ID", mCursor.getString(1));
                         myBundle.putString("name", mCursor.getString(2));
@@ -123,9 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtras(myBundle);
                         Toast.makeText(getApplicationContext(), mCursor.getString(2) + "님, 환영합니다.", Toast.LENGTH_LONG).show();
                         startActivity(intent);
-                    }
-
-                    else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "비밀번호가 틀립니다. 다시 입력해주세요", Toast.LENGTH_LONG).show();
                         break;
                     }
@@ -137,14 +139,14 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        if(!confirmed){
+        if (!confirmed) {
             Toast.makeText(getApplicationContext(), "없는 ID입니다. 다시 입력해주세요", Toast.LENGTH_LONG).show();
         }
 
     }
 
     // For pupup view
-    public void getRegister(){
+    public void getRegister() {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         get_layout = inflater.inflate(R.layout.popup_register, (ViewGroup) findViewById(R.id.popup_reg));
@@ -168,61 +170,61 @@ public class LoginActivity extends AppCompatActivity {
         createName = ed_reg_name.getText().toString();
         createPhone = ed_reg_phone.getText().toString();
 
-        bt_reg_id_confirm.setOnClickListener(new View.OnClickListener(){
+        bt_reg_id_confirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 // check the same ID
                 Boolean isSame = checkId();
 
-                if(isSame){
+                if (isSame) {
                     dupId = true;
                     Toast.makeText(getApplicationContext(), "ID가 존재합니다.", Toast.LENGTH_LONG).show();
-                }
-
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "사용가능한 ID입니다.", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        bt_create_register.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        bt_create_register.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 Boolean confirmed = false;
 
                 createPw = ed_reg_pw.getText().toString();
                 createName = ed_reg_name.getText().toString();
                 createPhone = ed_reg_phone.getText().toString();
 
-                // check Id
-                if(!dupId){
-                    Toast.makeText(getApplicationContext(), "is it okay?", Toast.LENGTH_SHORT).show();
-                    // check password
-                    if((!createPw.isEmpty()) && (createPw.equals(ed_reg_pw_confirm.getText().toString()))){
-                        // check name & phone number
-                        Toast.makeText(getApplicationContext(), "is it working?", Toast.LENGTH_SHORT).show();
-                        if(!(createName.isEmpty() || createPhone.isEmpty())){
-                            Toast.makeText(getApplicationContext(), "please..", Toast.LENGTH_SHORT).show();
-                            confirmed = true;
+                if (!clicked) {
+                    Toast.makeText(getApplicationContext(), "Error : 아이디 중복확인을 해주세요.", Toast.LENGTH_LONG).show();
+                } else {
+                    // check Id
+                    if (!dupId) {
+                        // check password
+                        if ((!createPw.isEmpty()) && (createPw.equals(ed_reg_pw_confirm.getText().toString()))) {
+                            // check name & phone number
+                            if (!(createName.isEmpty() || createPhone.isEmpty())) {
+                                confirmed = true;
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error : 비밀번호를 정확하게 입력해주세요.", Toast.LENGTH_LONG).show();
                         }
                     }
-                }
 
-                if(confirmed){
-
-                    saveData();
-                    Toast.makeText(getApplicationContext(), "가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
-                    popup.dismiss();
-                }
-
-                else{
-                    Toast.makeText(getApplicationContext(), "Error : 정보를 정확히 기입해주세요.", Toast.LENGTH_LONG).show();
+                    if (confirmed) {
+                        saveData();
+                        Toast.makeText(getApplicationContext(), "가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                        clearInfo();
+                        popup.dismiss();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error : 정보를 정확히 기입해주세요.", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
 
-        bt_reg_cancel.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        bt_reg_cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                clearInfo();
                 popup.dismiss();
             }
         });
@@ -234,7 +236,7 @@ public class LoginActivity extends AppCompatActivity {
         int OFFSET_X = 0;
         int OFFSET_Y = 0;
 
-        if(mode==1) {
+        if (mode == 1) {
             if (popup != null) {
                 popup.setFocusable(true);
                 popup.showAtLocation(get_layout, Gravity.CENTER, OFFSET_X, OFFSET_Y);
@@ -242,18 +244,20 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void saveData(){
-        mDBOpenHelper.insertColumn_User(createId,createName,createPw,createPhone);
+    private void saveData() {
+        mDBOpenHelper.insertColumn_User(createId, createName, createPw, createPhone);
     }
 
-    private Boolean checkId(){
+    private Boolean checkId() {
+        clicked = true;
+
         createId = ed_reg_id.getText().toString();
 
-        for (int i=0; i <= mDBOpenHelper.countUser();i++){
-            mCursor=mDBOpenHelper.getColumn_User(i);
+        for (int i = 0; i <= mDBOpenHelper.countUser(); i++) {
+            mCursor = mDBOpenHelper.getColumn_User(i);
 
             // cursor is initialized as -1
-            if(mCursor.moveToFirst() && mCursor.getCount() >= 1) {
+            if (mCursor.moveToFirst() && mCursor.getCount() >= 1) {
 
                 // starts with 1 : user
                 if (createId.equals(mCursor.getString(1))) {
@@ -262,9 +266,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-
         return false;
 
+    }
+
+    // Clear information from popup register
+    public void clearInfo() {
+        ed_reg_id.setText("");
+        ed_reg_pw.setText("");
+        ed_reg_pw_confirm.setText("");
+        ed_reg_name.setText("");
+        ed_reg_phone.setText("");
     }
 
 

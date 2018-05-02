@@ -5,7 +5,6 @@ package org.androidtown.hyme;
  */
 public class SpeechAlgorithm {
 
-    private String getText;
     private int type=0;
 
     public SpeechAlgorithm(){}
@@ -21,7 +20,6 @@ public class SpeechAlgorithm {
     // Predict type via text
     public int analyzeText(String text){
 
-        getText = text;
         String trimmed = text.trim();
         String analyzed="";
 
@@ -53,7 +51,7 @@ public class SpeechAlgorithm {
         }
 
         // predict etc. when speaker said about meeting begins or ends
-        if(analyzed.contains("회의를시작") || analyzed.contains("마치겠습니다")){
+        if( (analyzed.contains("회의") && analyzed.contains("시작")) || (analyzed.contains("회의") && (analyzed.contains("마치") || analyzed.contains("끝")))){
             return 5;
         }
 

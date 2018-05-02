@@ -86,6 +86,16 @@ public class DbOpenHelper {
         return count;
     }
 
+    public long countConf(){
+        long count = DatabaseUtils.queryNumEntries(mDB, Databases.ConferenceDatabaseUtil._TABLE_NAME);
+        return count;
+    }
+
+    public long countSpeech(){
+        long count = DatabaseUtils.queryNumEntries(mDB, Databases.SpeechDatabaseUtil._TABLE_NAME);
+        return count;
+    }
+
     // Insert DB
     public long insertColumn_User(String _userId, String _userName, String _userPassword, String _userPhoneNumber){
         ContentValues values = new ContentValues();
@@ -105,8 +115,9 @@ public class DbOpenHelper {
         return mDB.insert(Databases.ConferenceDatabaseUtil._TABLE_NAME, null, values);
     }
 
-    public long insertColumn_Speech(String _userName, String _speechType, String _speechContent){
+    public long insertColumn_Speech(String _conferenceName, String _userName, String _speechType, String _speechContent){
         ContentValues values = new ContentValues();
+        values.put(Databases.SpeechDatabaseUtil.CONFERENCE_NAME, _conferenceName);
         values.put(Databases.SpeechDatabaseUtil.USER_NAME, _userName);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_TYPE, _speechType);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_CONTENT, _speechContent);
@@ -132,8 +143,9 @@ public class DbOpenHelper {
         return mDB.update(Databases.ConferenceDatabaseUtil._TABLE_NAME, values, "CONFERENCE_NAME="+_conferenceName, null)>0;
     }
 
-    public boolean updateColumn_Speech(String _userName, String _speechType, String _speechContent){
+    public boolean updateColumn_Speech(String _conferenceName, String _userName, String _speechType, String _speechContent){
         ContentValues values = new ContentValues();
+        values.put(Databases.SpeechDatabaseUtil.CONFERENCE_NAME, _conferenceName);
         values.put(Databases.SpeechDatabaseUtil.USER_NAME, _userName);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_TYPE, _speechType);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_CONTENT, _speechContent);
@@ -156,6 +168,7 @@ public class DbOpenHelper {
         return c;
     }
 
+
     public Cursor getColumn_Con(String _conName){
         Cursor c = mDB.query(Databases.ConferenceDatabaseUtil._TABLE_NAME, null,
                 "CONFERENCE_NAME="+_conName, null, null, null, null);
@@ -163,7 +176,21 @@ public class DbOpenHelper {
             c.moveToFirst();
         return c;
     }
+    public Cursor getColumn_Con(long _id){
+        Cursor c = mDB.query(Databases.ConferenceDatabaseUtil._TABLE_NAME, null,
+                "_ID="+_id, null, null, null, null);
+        if(c != null && c.getCount() != 0)
+            c.moveToFirst();
+        return c;
+    }
 
+    public Cursor getSpeech_Con(String _conName){
+        Cursor c = mDB.query(Databases.SpeechDatabaseUtil._TABLE_NAME, null,
+                "CONFERENCE_NAME="+_conName, null, null, null, null);
+        if(c != null && c.getCount() != 0)
+            c.moveToFirst();
+        return c;
+    }
     public Cursor getColumn_Speech(long _id){
         Cursor c = mDB.query(Databases.SpeechDatabaseUtil._TABLE_NAME, null,
                 "_id="+_id, null, null, null, null);

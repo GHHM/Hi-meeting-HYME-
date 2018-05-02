@@ -28,12 +28,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:backgroundTint="@color/cleanBlue"
                 android:background="@drawable/round_shape"
+                android:backgroundTint="@color/cleanBlue"
+                android:clickable="false"
                 android:text="@string/activity_log_share"
                 android:textColor="#ffffff"
-                android:visibility="invisible"
-                android:clickable="false"/>
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 
@@ -46,7 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:text="@string/activity_log_message"
             android:textSize="17dp"
             android:textStyle="bold" />
@@ -56,60 +55,55 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_weight="1.5"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_weight="1"
+        android:weightSum="5">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <CheckBox
+            android:id="@+id/cb_type_opinion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:weightSum="3">
+            android:checked="true"
+            android:text="@string/dialog_speech_opinion"
+            android:textSize="12dp"/>
 
-            <CheckBox
-                android:id="@+id/cb_type_opinion"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="@string/dialog_speech_opinion" />
+        <CheckBox
+            android:id="@+id/cb_type_additional"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:checked="true"
+            android:text="@string/dialog_speech_additional"
+            android:textSize="12dp"/>
 
-            <CheckBox
-                android:id="@+id/cb_type_additional"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_weight="2"
-                android:checked="true"
-
-                android:text="@string/dialog_speech_additional" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <CheckBox
+            android:id="@+id/cb_type_ask"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:weightSum="3">
+            android:checked="true"
+            android:text="@string/dialog_speech_ask"
+            android:textSize="12dp"/>
 
-            <CheckBox
-                android:id="@+id/cb_type_ask"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="@string/dialog_speech_ask" />
+        <CheckBox
+            android:id="@+id/cb_type_answer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/dialog_speech_answer"
+            android:textSize="12dp"/>
 
-            <CheckBox
-                android:id="@+id/cb_type_answer"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_weight="2"
-                android:checked="true"
-                android:text="@string/dialog_speech_answer" />
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/cb_type_etc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/dialog_speech_etc"
+            android:textSize="12dp"/>
     </LinearLayout>
 
     <Space

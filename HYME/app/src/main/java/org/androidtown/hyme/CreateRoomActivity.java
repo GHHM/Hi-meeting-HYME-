@@ -109,6 +109,9 @@ public class CreateRoomActivity extends AppCompatActivity {
                     }
                     else
                         participants = getPart;
+
+                    // initialize
+                    ed_create_participant.setText("");
                 }
             }
         });
@@ -181,21 +184,26 @@ public class CreateRoomActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         // onTimeSet method
         public void onTimeSet(TimePicker view, int hour, int minute) {
+            String getAmpm;
+
             if(hour >= 12){
                 if(hour>12){
                     hour -= 12;
                 }
                 tv_create_room_ampm.setText("오후");
+                getAmpm = "PM";
             }
 
             else{
                 tv_create_room_ampm.setText("오전");
+                getAmpm = "AM";
             }
 
             tv_create_room_hour.setText(hour + "");
             tv_create_room_minute.setText(minute + "");
             set_time = tv_create_room_hour.getText().toString();
             set_time += ":" + tv_create_room_minute.getText().toString();
+            set_time += " " + getAmpm;
         }
     };
 

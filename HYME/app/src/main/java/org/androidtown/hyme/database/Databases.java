@@ -35,6 +35,7 @@ public final class Databases {
     }
 
     public static final class SpeechDatabaseUtil implements BaseColumns {
+        public static final String CONFERENCE_NAME = "conference_name";
         public static final String USER_NAME = "user_name";
         public static final String SPEECH_TYPE = "speech_type";
         public static final String SPEECH_CONTENT = "speech_content";
@@ -42,6 +43,7 @@ public final class Databases {
         public static final String _CREATE =
                 "create table "+_TABLE_NAME+"("
                         +_ID+" integer primary key autoincrement, "
+                        +CONFERENCE_NAME+" text not null , "
                         +USER_NAME+" text not null , "
                         +SPEECH_TYPE+" text not null , "
                         +SPEECH_CONTENT+" text not null  ); ";

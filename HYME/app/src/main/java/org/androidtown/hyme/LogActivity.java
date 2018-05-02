@@ -30,7 +30,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
     ListView lv_participant_log;
     Button bt_go_previous;
 
-    UserInfo mUserInfo;
+    ConferenceInfo mConferInfo;
     int countTable = 0;
 
     DbOpenHelper mDBOpenHelper;
@@ -52,7 +52,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
     public void initView() {
         Bundle getBundle = new Bundle();
         getBundle = getIntent().getExtras();
-        mUserInfo = new UserInfo(getBundle.getString("ID"), getBundle.getString("name"));
+        mConferInfo = new ConferenceInfo(getBundle.getString("title"), getBundle.getString("members"));
 
         bt_share = (Button) findViewById(R.id.bt_share);
         bt_go_previous = (Button) findViewById(R.id.bt_go_previous);
@@ -73,12 +73,12 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         logList.addItem(countTable+1, "김단우", "질문", "외국에서는 우리나라의 효도법과 비슷한 제도가...");
         logList.addItem(countTable+2, "박동민", "의견", "홍길동씨와 다르게, 저는 부양의무에 대해서 이렇게 생각하는데...");
 
+        lv_participant_log.setAdapter(logList);
+
         cb_type_opinion.setOnCheckedChangeListener(this);
         cb_type_additional.setOnCheckedChangeListener(this);
         cb_type_ask.setOnCheckedChangeListener(this);
         cb_type_answer.setOnCheckedChangeListener(this);
-
-        lv_participant_log.setAdapter(logList);
 
         bt_share.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -93,6 +93,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
             }
         });
 
+        // Get the specific speech information
         lv_participant_log.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -205,11 +206,13 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
     public void getData(){
         int i=0;
 
-        while(i<mDBOpenHelper.countUser()){
+        while(i<=mDBOpenHelper.countSpeech()){
             mCursor=mDBOpenHelper.getColumn_Speech(i);
 
             if(mCursor.moveToFirst() && mCursor.getCount() >=1 ){
-               logList.addItem(countTable, mCursor.getString(1), mCursor.getString(2), mCursor.getString(3));
+                if(mCursor.getString(1).equals(mConferInfo.getTitle())) {
+                    logList.addItem(countTable, mCursor.getString(2), mCursor.getString(3), mCursor.getString(4));
+                }
             }
 
             i++;

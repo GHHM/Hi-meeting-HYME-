@@ -41,6 +41,7 @@
     <string name="dialog_speech_ask">질문</string>
     <string name="dialog_speech_additional">추가내용</string>
     <string name="dialog_speech_answer">답변</string>
+    <string name="dialog_speech_etc">기타</string>
     <string name="dialog_speech_ongoing">발언중</string>
 
     <!-- participant activity -->
@@ -58,7 +59,8 @@
 
     <!-- log activity -->
     <string name="activity_log_title">회의 로그</string>
-    <string name="activity_log_message">보고싶은 대화 종류를 선택하세요.</string>
+    <string name="activity_log_message"><li>발언 종류</li></string>
+    <string name="activity_log_name">발언자</string>
     <string name="activity_log_share">공유</string>
 
     <!-- download activity -->
