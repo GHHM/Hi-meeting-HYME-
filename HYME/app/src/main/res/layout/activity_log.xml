@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_log_title"
-            android:textColor="@color/limeGreen"
+            android:textColor="@color/darkBlue"
             android:textSize="30dp" />
 
         <LinearLayout
@@ -125,7 +125,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:background="@color/darkerGray"
+            android:background="@color/narrowBlue"
             android:weightSum="6">
 
             <TextView
@@ -133,6 +133,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.7"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
             <TextView
@@ -140,6 +141,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:text="@string/activity_participant_name"
                 android:textSize="15dp" />
 
@@ -149,6 +151,7 @@
                 android:layout_weight="0.8"
                 android:gravity="center"
                 android:text="@string/activity_participant_type"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
             <TextView
@@ -156,6 +159,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3.3"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:text="@string/activity_participant_content"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -183,7 +187,7 @@
         android:layout_marginTop="10dp"
         android:layout_weight="0.6"
         android:background="@drawable/round_shape"
-        android:backgroundTint="@color/cleanBlue"
+        android:backgroundTint="@color/skyBlue"
         android:text="뒤로가기"
         android:textColor="#ffffff" />
 

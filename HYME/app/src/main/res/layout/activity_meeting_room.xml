@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_meeting_title"
-            android:textColor="@color/red"
+            android:textColor="@color/darkBlue"
             android:textSize="30dp" />
     </LinearLayout>
 
@@ -29,7 +29,7 @@
         android:id="@+id/lv_meeting_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9.5"/>
+        android:layout_weight="9.5" />
 
     <LinearLayout
         android:layout_width="match_parent"

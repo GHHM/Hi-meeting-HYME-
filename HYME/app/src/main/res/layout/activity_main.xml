@@ -4,16 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBlue"
+    android:background="@drawable/loading"
     android:orientation="vertical"
     android:weightSum="7"
     tools:context="org.androidtown.hyme.MainActivity">
 
-    <!-- blank -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></LinearLayout>
 
     <!-- image -->
     <LinearLayout
@@ -24,12 +19,6 @@
         android:weightSum="3"
         android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_weight="1.9"
-            android:background="@drawable/hyme_mic"></LinearLayout>
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -39,56 +28,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1.5"
             android:orientation="vertical"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="300dp"
-                android:layout_height="90dp"
-                android:gravity="center"
-                android:background="@drawable/hyme_logo" />
-
         </LinearLayout>
-
-        <!-- description -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:background="@drawable/hyme_acro"/>
-        </LinearLayout>
-
-
-
     </LinearLayout>
-
-    <!-- description -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/activity_main_title_description"
-            android:textSize="20dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_weight="1.2"
-        android:layout_gravity="center"
-        android:background="@drawable/meeting"></LinearLayout>
 
 </LinearLayout>

@@ -1,12 +1,7 @@
 package org.androidtown.hyme;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -80,6 +75,7 @@ public class MeetingRoomActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(MeetingRoomActivity.this, CreateRoomActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

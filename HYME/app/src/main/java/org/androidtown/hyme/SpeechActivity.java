@@ -275,7 +275,7 @@ public class SpeechActivity extends AppCompatActivity {
                     case R.id.rb_speech_type_2:
                         typeStatus = 2;
                         if (two.isChecked()) {
-                            two.setBackgroundResource(R.color.gold);
+                            two.setBackgroundResource(R.color.cleanBlue);
                             checked = true;
                         }
                         else {
@@ -289,7 +289,7 @@ public class SpeechActivity extends AppCompatActivity {
                     case R.id.rb_speech_type_3:
                         typeStatus = 3;
                         if (three.isChecked()) {
-                            three.setBackgroundResource(R.color.gold);
+                            three.setBackgroundResource(R.color.limeGreen);
                             checked = true;
                         }
                         else {
@@ -303,7 +303,7 @@ public class SpeechActivity extends AppCompatActivity {
                     case R.id.rb_speech_type_4:
                         typeStatus = 4;
                         if (four.isChecked()) {
-                            four.setBackgroundResource(R.color.gold);
+                            four.setBackgroundResource(R.color.red);
                             checked = true;
                         }
                         else {
