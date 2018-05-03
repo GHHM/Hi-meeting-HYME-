@@ -72,9 +72,9 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         getData();
 
         /* Temporal setting */
-        logList.addItem(countTable, "김혜미", "추가", "그와 관련된 보도 자료가 있습니다. 다음을 참고하시면...");
-        logList.addItem(countTable+1, "김단우", "질문", "외국에서는 우리나라의 효도법과 비슷한 제도가...");
-        logList.addItem(countTable+2, "박동민", "의견", "홍길동씨와 다르게, 저는 부양의무에 대해서 이렇게 생각하는데...");
+        //logList.addItem(countTable, "김혜미", "추가", "그와 관련된 보도 자료가 있습니다. 다음을 참고하시면...");
+        //logList.addItem(countTable+1, "김단우", "질문", "외국에서는 우리나라의 효도법과 비슷한 제도가...");
+        //logList.addItem(countTable+2, "박동민", "의견", "홍길동씨와 다르게, 저는 부양의무에 대해서 이렇게 생각하는데...");
 
         lv_participant_log.setAdapter(logList);
 

@@ -36,12 +36,12 @@ public class SpeechAlgorithm {
         }
 
         // predict as opinion
-        if(analyzed.contains("제생각은") || analyzed.contains("제입장은") || analyzed.contains("와다르게")){
+        if(analyzed.contains("제 생각은") || analyzed.contains("제 입장은") || analyzed.contains("와 다르게") || analyzed.contains("의견")){
             return 1;
         }
 
         // predict as additional content
-        if (analyzed.contains("덧붙여서") || analyzed.contains("추가로")) {
+        if (analyzed.contains("덧붙여서") || analyzed.contains("추가로") || analyzed.contains("추가")) {
             return 2;
         }
 
@@ -51,7 +51,7 @@ public class SpeechAlgorithm {
         }
 
         // predict etc. when speaker said about meeting begins or ends
-        if( (analyzed.contains("회의") && analyzed.contains("시작")) || (analyzed.contains("회의") && (analyzed.contains("마치") || analyzed.contains("끝")))){
+        if( analyzed.contains("안녕하세요")||(analyzed.contains("회의") && analyzed.contains("시작")) || (analyzed.contains("회의") && (analyzed.contains("마치") || analyzed.contains("끝")))){
             return 5;
         }
 
