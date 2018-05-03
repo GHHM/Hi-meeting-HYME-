@@ -262,7 +262,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                 if(mCursor.getString(1).equals(mConferInfo.getTitle())) {
                     if(mCursor.getString(2).equals(name)){
                         if(mCursor.getString(3).equals(type)){
-                            if(mCursor.getString(4).startsWith(go.substring(0,20))){
+                            if(mCursor.getString(4).startsWith(con.substring(0,20))){
                                 go = mCursor.getString(4);
                                 break;
                             }
