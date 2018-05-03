@@ -143,13 +143,13 @@ public class DbOpenHelper {
         return mDB.update(Databases.ConferenceDatabaseUtil._TABLE_NAME, values, "CONFERENCE_NAME="+_conferenceName, null)>0;
     }
 
-    public boolean updateColumn_Speech(String _conferenceName, String _userName, String _speechType, String _speechContent){
+    public boolean updateColumn_Speech(long id, String _conferenceName, String _userName, String _speechType, String _speechContent){
         ContentValues values = new ContentValues();
         values.put(Databases.SpeechDatabaseUtil.CONFERENCE_NAME, _conferenceName);
         values.put(Databases.SpeechDatabaseUtil.USER_NAME, _userName);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_TYPE, _speechType);
         values.put(Databases.SpeechDatabaseUtil.SPEECH_CONTENT, _speechContent);
-        return mDB.update(Databases.SpeechDatabaseUtil._TABLE_NAME,values, "CONFERENCE_NAME="+_conferenceName+",USER_NAME="+_userName+",SPEECH_TYPE="+_speechType,null)>0;
+        return mDB.update(Databases.SpeechDatabaseUtil._TABLE_NAME,values, "_ID="+id,null)>0;
     }
 
     // ID 컬럼 얻어 오기

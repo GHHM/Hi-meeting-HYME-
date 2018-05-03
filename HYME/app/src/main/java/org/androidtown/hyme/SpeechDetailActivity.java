@@ -2,6 +2,7 @@ package org.androidtown.hyme;
 
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.CharArrayBuffer;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -144,7 +146,7 @@ public class SpeechDetailActivity extends AppCompatActivity {
                         if (mCursor.getString(3).equals(type)) {
                             if (mCursor.getString(4).equals(content)) {
                                 content = ed_detail_content.getText().toString();
-                                mDBOpenHelper.updateColumn_Speech(title, speaker, type, content);
+                                mDBOpenHelper.updateColumn_Speech(i, title, speaker, type, content);
                                 break;
                             }
                         }
@@ -156,4 +158,19 @@ public class SpeechDetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            Intent intent = new Intent(SpeechDetailActivity.this, LogActivity.class);
+            Bundle myBundle = new Bundle();
+            myBundle.putString("title", title);
+            myBundle.putString("members", speaker);
+            intent.putExtras(myBundle);
+            finish();
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

@@ -4,11 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import org.androidtown.hyme.database.DbOpenHelper;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CreateRoomActivity extends AppCompatActivity {
@@ -47,6 +51,8 @@ public class CreateRoomActivity extends AppCompatActivity {
     TextView tv_create_room_month;
     TextView tv_create_room_day;
 
+    UserInfo mUserInfo;
+
     DialogFragment mFragment = null;
 
     DbOpenHelper mDBOpenHelper;
@@ -59,6 +65,10 @@ public class CreateRoomActivity extends AppCompatActivity {
     }
 
     public void initView() {
+        Bundle getBundle = new Bundle();
+        getBundle = getIntent().getExtras();
+        mUserInfo = new UserInfo(getBundle.getString("ID"), getBundle.getString("name"));
+
         ed_create_name = (EditText) findViewById(R.id.ed_create_name);
         tv_create_participant_number = (TextView) findViewById(R.id.tv_create_participant_number);
         ed_create_participant = (EditText) findViewById(R.id.ed_create_participant);
@@ -79,7 +89,6 @@ public class CreateRoomActivity extends AppCompatActivity {
 
         pt_list = new ParticipantCreateList(this);
         mDBOpenHelper = new DbOpenHelper(this);
-
 
         bt_create_participant_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +139,14 @@ public class CreateRoomActivity extends AppCompatActivity {
                 else{
                     room_name = ed_create_name.getText().toString();
                     saveData();
+                    Toast.makeText(getApplicationContext(), "회의방을 생성했습니다.", Toast.LENGTH_SHORT).show();
+                    Bundle myBundle = new Bundle();
+                    myBundle.putString("ID", mUserInfo.getID());
+                    myBundle.putString("name", mUserInfo.getName());
+                    Intent intent = new Intent(CreateRoomActivity.this, MeetingRoomActivity.class);
+                    intent.putExtras(myBundle);
                     finish();
+                    startActivity(intent);
                 }
             }
         });
@@ -145,12 +161,14 @@ public class CreateRoomActivity extends AppCompatActivity {
         tv_create_room_hour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cb_create_current_time.setChecked(false);
                 showTimeDateDialog(0);
             }
         });
         tv_create_room_minute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cb_create_current_time.setChecked(false);
                 showTimeDateDialog(0);
             }
         });
@@ -159,22 +177,70 @@ public class CreateRoomActivity extends AppCompatActivity {
         tv_create_room_year.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cb_create_current_time.setChecked(false);
                 showTimeDateDialog(1);
             }
         });
         tv_create_room_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cb_create_current_time.setChecked(false);
                 showTimeDateDialog(1);
             }
         });
         tv_create_room_day.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cb_create_current_time.setChecked(false);
                 showTimeDateDialog(1);
             }
         });
 
+        cb_create_current_time.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                    Calendar cal = Calendar.getInstance();
+                    String current = dateFormat.format(cal.getTime());
+                    String time = current.substring(current.length()-5, current.length());
+                    String date = current.substring(0, 10);
+                    String times[] = time.split(":");
+                    String dates[] = date.split("/");
+
+                    int getHour = Integer.parseInt(times[0]);
+                    String getAmpm;
+
+                    if(getHour >= 12){
+                        if(getHour>12){
+                            getHour -= 12;
+                        }
+                        tv_create_room_ampm.setText("오후");
+                        getAmpm = "PM";
+                    }
+
+                    else{
+                        tv_create_room_ampm.setText("오전");
+                        getAmpm = "AM";
+                    }
+
+                    if(getHour<10){
+                        tv_create_room_hour.setText("0" + getHour);
+                    }
+                    else {
+                        tv_create_room_hour.setText(getHour + "");
+                    }
+                    tv_create_room_minute.setText(times[1]);
+                    tv_create_room_year.setText(dates[0]);
+                    tv_create_room_month.setText(dates[1]);
+                    tv_create_room_day.setText(dates[2]);
+
+                    set_time = tv_create_room_hour.getText().toString();
+                    set_time += ":" + tv_create_room_minute.getText().toString();
+                    set_time += " " + getAmpm;
+                }
+            }
+        });
     }
 
     private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -195,8 +261,20 @@ public class CreateRoomActivity extends AppCompatActivity {
                 getAmpm = "AM";
             }
 
-            tv_create_room_hour.setText(hour + "");
-            tv_create_room_minute.setText(minute + "");
+            if(hour<10){
+                tv_create_room_hour.setText("0" + hour);
+            }
+            else {
+                tv_create_room_hour.setText(hour + "");
+            }
+
+            if(minute<10){
+                tv_create_room_minute.setText("0" + minute);
+            }
+            else {
+                tv_create_room_minute.setText(minute + "");
+            }
+
             set_time = tv_create_room_hour.getText().toString();
             set_time += ":" + tv_create_room_minute.getText().toString();
             set_time += " " + getAmpm;
@@ -207,8 +285,22 @@ public class CreateRoomActivity extends AppCompatActivity {
         // onDateSet method
         public void onDateSet(DatePicker view, int year, int month, int day) {
             tv_create_room_year.setText(year + "");
-            tv_create_room_month.setText(month+1 + "");
-            tv_create_room_day.setText(day + "");
+            month+=1;
+
+            if(month<10){
+                tv_create_room_month.setText("0" + month);
+            }
+            else {
+                tv_create_room_month.setText(month + "");
+            }
+
+            if(day<10){
+                tv_create_room_day.setText("0" + day);
+            }
+            else {
+                tv_create_room_day.setText(day + "");
+            }
+
             set_date = tv_create_room_year.getText().toString();
             set_date += "/" + tv_create_room_month.getText().toString();
             set_date += "/" + tv_create_room_day.getText().toString();

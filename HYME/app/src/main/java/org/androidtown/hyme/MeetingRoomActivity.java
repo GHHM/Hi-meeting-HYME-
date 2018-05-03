@@ -74,8 +74,12 @@ public class MeetingRoomActivity extends AppCompatActivity {
         bt_go_create.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(MeetingRoomActivity.this, CreateRoomActivity.class);
-                startActivity(intent);
+                Bundle myBundle = new Bundle();
+                myBundle.putString("ID", mUserInfo.getID());
+                myBundle.putString("name", mUserInfo.getName());
+                intent.putExtras(myBundle);
                 finish();
+                startActivity(intent);
             }
         });
     }
@@ -95,4 +99,6 @@ public class MeetingRoomActivity extends AppCompatActivity {
             i++;
         }
     }
+
+
 }

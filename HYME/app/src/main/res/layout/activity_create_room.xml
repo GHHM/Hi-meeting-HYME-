@@ -167,19 +167,21 @@
             android:layout_weight="3"
             android:gravity="end">
 
+            <!-- will update soon! -->s
+            <CheckBox
+                android:id="@+id/cb_create_alarm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/activity_create_alarm"
+                android:visibility="invisible"/>
+
             <CheckBox
                 android:id="@+id/cb_create_current_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:text="@string/activity_create_current_time"/>
-
-            <CheckBox
-                android:id="@+id/cb_create_alarm"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/activity_create_alarm"/>
         </LinearLayout>
     </LinearLayout>
 
