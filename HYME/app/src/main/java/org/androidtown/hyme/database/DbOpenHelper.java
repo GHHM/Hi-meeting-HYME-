@@ -167,8 +167,6 @@ public class DbOpenHelper {
             c.moveToFirst();
         return c;
     }
-
-
     public Cursor getColumn_Con(String _conName){
         Cursor c = mDB.query(Databases.ConferenceDatabaseUtil._TABLE_NAME, null,
                 "CONFERENCE_NAME="+_conName, null, null, null, null);
@@ -183,10 +181,9 @@ public class DbOpenHelper {
             c.moveToFirst();
         return c;
     }
-
-    public Cursor getSpeech_Con(String _conName){
+    public Cursor getSpeech_Con(String _speechContent, String _userName){
         Cursor c = mDB.query(Databases.SpeechDatabaseUtil._TABLE_NAME, null,
-                "CONFERENCE_NAME="+_conName, null, null, null, null);
+                "SPEECH_CONTENT="+_speechContent+" ,USER_NAME="+_userName, null, null, null, null);
         if(c != null && c.getCount() != 0)
             c.moveToFirst();
         return c;

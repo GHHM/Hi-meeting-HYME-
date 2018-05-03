@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -131,8 +130,7 @@ public class CreateRoomActivity extends AppCompatActivity {
                 else{
                     room_name = ed_create_name.getText().toString();
                     saveData();
-                    Intent intent = new Intent(CreateRoomActivity.this, MeetingRoomActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
             }
         });
