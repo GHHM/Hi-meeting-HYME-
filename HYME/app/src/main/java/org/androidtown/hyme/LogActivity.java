@@ -105,11 +105,14 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                 TextView temp_type = (TextView) view.findViewById(R.id.tv_log_type);
                 TextView temp_content = (TextView) view.findViewById(R.id.tv_log_content);
 
+                // Get original content
+                String originalContent = getRealContent(temp_name.getText().toString(), temp_type.getText().toString(), temp_content.getText().toString());
+
                 Bundle myBundle = new Bundle();
                 myBundle.putString("title", mConferInfo.getTitle());
                 myBundle.putString("speaker", temp_name.getText().toString());
                 myBundle.putString("type", temp_type.getText().toString());
-                myBundle.putString("content", temp_content.getText().toString());
+                myBundle.putString("content", originalContent);
                 Intent intent = new Intent(LogActivity.this, SpeechDetailActivity.class);
                 intent.putExtras(myBundle);
                 finish();
@@ -233,13 +236,44 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
 
             if(mCursor.moveToFirst() && mCursor.getCount() >=1 ){
                 if(mCursor.getString(1).equals(mConferInfo.getTitle())) {
-                    logList.addItem(countTable, mCursor.getString(2), mCursor.getString(3), mCursor.getString(4));
+                    String contentPreview = mCursor.getString(4);
+                    if(contentPreview.length() >25){
+                        contentPreview = contentPreview.substring(0, 25) + "...";
+                    }
+
+                    logList.addItem(countTable, mCursor.getString(2), mCursor.getString(3), contentPreview);
                 }
             }
 
             i++;
             countTable++;
         }
+    }
+
+    // get original content from database
+    private String getRealContent(String name, String type, String con){
+        String go="";
+        int i=0;
+
+        while(i<=mDBOpenHelper.countSpeech()){
+            mCursor=mDBOpenHelper.getColumn_Speech(i);
+
+            if(mCursor.moveToFirst() && mCursor.getCount() >=1 ){
+                if(mCursor.getString(1).equals(mConferInfo.getTitle())) {
+                    if(mCursor.getString(2).equals(name)){
+                        if(mCursor.getString(3).equals(type)){
+                            if(mCursor.getString(4).startsWith(go.substring(0,20))){
+                                go = mCursor.getString(4);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            i++;
+        }
+        return go;
     }
 
 }
