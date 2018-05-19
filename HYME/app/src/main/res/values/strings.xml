@@ -41,6 +41,7 @@
     <string name="dialog_speech_ask">질문</string>
     <string name="dialog_speech_additional">추가내용</string>
     <string name="dialog_speech_answer">답변</string>
+    <string name="dialog_speech_refutation">반박</string>
     <string name="dialog_speech_etc">기타</string>
     <string name="dialog_speech_ongoing">발언중</string>
 

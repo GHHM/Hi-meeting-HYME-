@@ -32,7 +32,7 @@ public class SpeechAlgorithm {
 
         // predict etc. as former type didn't select yet
         if(type == 0){
-            return 5;
+            return 6;
         }
 
         // predict as opinion
@@ -40,36 +40,42 @@ public class SpeechAlgorithm {
             return 1;
         }
 
-        // predict as additional content
-        if (analyzed.contains("덧붙여서") || analyzed.contains("추가로") || analyzed.contains("추가")) {
+        // predict as question
+        if(analyzed.contains("질문") || analyzed.contains("여쭤볼게") || analyzed.contains("물어볼게")){
             return 2;
         }
 
-        // predict as question
-        if(analyzed.contains("질문") || analyzed.contains("여쭤볼게") || analyzed.contains("물어볼게")){
-            return 3;
+        // predict as refutation
+        if(analyzed.contains("하지만") || analyzed.contains("의문") || analyzed.contains("이지만") || analyzed.contains("그러나")){
+            return 4;
         }
 
-        // predict etc. when speaker said about meeting begins or ends
-        if( analyzed.contains("안녕하세요")||(analyzed.contains("회의") && analyzed.contains("시작")) || (analyzed.contains("회의") && (analyzed.contains("마치") || analyzed.contains("끝")))){
+        // predict as additional content
+        if (analyzed.contains("덧붙여서") || analyzed.contains("추가로") || analyzed.contains("추가")) {
             return 5;
         }
 
+        // predict etc. when speaker said about meeting begins or ends
+        if( analyzed.contains("안녕하세요")||(analyzed.contains("회의") && analyzed.contains("시작")) ||
+                (analyzed.contains("회의") && (analyzed.contains("마치") || analyzed.contains("끝")))){
+            return 6;
+        }
+
         // Uncertain text just defined as additional content
-        return 2;
+        return 5;
 
     }
 
     // Predict type via former type
     public int analyzeType(){
 
-        // predict as answer if the former type was question
-        if(type == 3){
-            return 4;
+        // predict as answer if the former type was question or refutation
+        if((type == 2) || (type == 4)){
+            return 3;
         }
 
         // change to etc. as the answer was over
-        if(type == 4){
+        if(type == 3){
             return 0;
         }
 

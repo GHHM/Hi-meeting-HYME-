@@ -8,7 +8,7 @@
     <color name="gray">#A9A9A9</color>
     <color name="darkerGray">#BDBDBD</color>
     <color name="gold">#FFD700</color>
-    <color name="red">#d12469</color>
+    <color name="red">#FF0000</color>
     <color name="limeGreen">#32CD32</color>
     <color name="Orange">#FFA500</color>
     <color name="littleDark">#717171</color>
@@ -20,4 +20,6 @@
     <color name="oceanBlue">#65dde6</color>
     <color name="emeBlue">#69e2c2</color>
     <color name="white">#ffffff</color>
+    <color name="purple">#800080</color>
+    <color name="pink">#FFC0CB</color>
 </resources>

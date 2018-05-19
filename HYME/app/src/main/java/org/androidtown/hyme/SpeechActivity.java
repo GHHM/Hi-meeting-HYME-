@@ -36,7 +36,8 @@ public class SpeechActivity extends AppCompatActivity {
     TextView tv_speak_type;
     Spinner spinner_speech_speaker;
     ArrayAdapter<String> adapter;
-    RadioGroup rg_speech_type;
+    RadioGroup rg_speech_type_1;
+    RadioGroup rg_speech_type_2;
     TextView tv_speech_formal_name;
     TextView tv_speech_formal_content;
 
@@ -234,28 +235,40 @@ public class SpeechActivity extends AppCompatActivity {
                     listened = 0;
                     tv_voice_recog_result.setText(saveString);
 
-                    for (int i = 0; i < rg_speech_type.getChildCount(); i++) {
-                        rg_speech_type.getChildAt(i).setBackgroundResource(R.color.LightGray);
+                    for (int i = 0; i < rg_speech_type_1.getChildCount(); i++) {
+                        rg_speech_type_1.getChildAt(i).setBackgroundResource(R.color.LightGray);
+                    }
+                    for (int i = 0; i < rg_speech_type_2.getChildCount(); i++) {
+                        rg_speech_type_2.getChildAt(i).setBackgroundResource(R.color.LightGray);
                     }
 
                     saveData();
 
                     stopVoiceRecorder();
 
-                    rg_speech_type.clearCheck();
+                    rg_speech_type_1.clearCheck();
+                    rg_speech_type_2.clearCheck();
                 }
 
             }
         });
 
-        rg_speech_type = (RadioGroup) findViewById(R.id.rg_speech_type);
-        rg_speech_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg_speech_type_1 = (RadioGroup) findViewById(R.id.rg_speech_type_1);
+        rg_speech_type_2 = (RadioGroup) findViewById(R.id.rg_speech_type_2);
+
+        rg_speech_type_1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 RadioButton one = (RadioButton) findViewById(R.id.rb_speech_type_1);
                 RadioButton two = (RadioButton) findViewById(R.id.rb_speech_type_2);
                 RadioButton three = (RadioButton) findViewById(R.id.rb_speech_type_3);
                 RadioButton four = (RadioButton) findViewById(R.id.rb_speech_type_4);
+                RadioButton five = (RadioButton) findViewById(R.id.rb_speech_type_5);
+                RadioButton six = (RadioButton) findViewById(R.id.rb_speech_type_6);
+
+                four.setBackgroundResource(R.color.LightGray);
+                five.setBackgroundResource(R.color.LightGray);
+                six.setBackgroundResource(R.color.LightGray);
 
                 switch (i) {
                     case R.id.rb_speech_type_1:
@@ -270,12 +283,11 @@ public class SpeechActivity extends AppCompatActivity {
                         }
                         two.setBackgroundResource(R.color.LightGray);
                         three.setBackgroundResource(R.color.LightGray);
-                        four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_2:
                         typeStatus = 2;
                         if (two.isChecked()) {
-                            two.setBackgroundResource(R.color.cleanBlue);
+                            two.setBackgroundResource(R.color.limeGreen);
                             checked = true;
                         }
                         else {
@@ -284,12 +296,11 @@ public class SpeechActivity extends AppCompatActivity {
                         }
                         one.setBackgroundResource(R.color.LightGray);
                         three.setBackgroundResource(R.color.LightGray);
-                        four.setBackgroundResource(R.color.LightGray);
                         break;
                     case R.id.rb_speech_type_3:
                         typeStatus = 3;
                         if (three.isChecked()) {
-                            three.setBackgroundResource(R.color.limeGreen);
+                            three.setBackgroundResource(R.color.red);
                             checked = true;
                         }
                         else {
@@ -298,21 +309,69 @@ public class SpeechActivity extends AppCompatActivity {
                         }
                         one.setBackgroundResource(R.color.LightGray);
                         two.setBackgroundResource(R.color.LightGray);
-                        four.setBackgroundResource(R.color.LightGray);
                         break;
+                    default:
+                        typeStatus = 0;
+                        break;
+                }
+
+                setType();
+            }
+        });
+
+        rg_speech_type_2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                RadioButton one = (RadioButton) findViewById(R.id.rb_speech_type_1);
+                RadioButton two = (RadioButton) findViewById(R.id.rb_speech_type_2);
+                RadioButton three = (RadioButton) findViewById(R.id.rb_speech_type_3);
+                RadioButton four = (RadioButton) findViewById(R.id.rb_speech_type_4);
+                RadioButton five = (RadioButton) findViewById(R.id.rb_speech_type_5);
+                RadioButton six = (RadioButton) findViewById(R.id.rb_speech_type_6);
+
+                one.setBackgroundResource(R.color.LightGray);
+                two.setBackgroundResource(R.color.LightGray);
+                three.setBackgroundResource(R.color.LightGray);
+
+                switch (i) {
                     case R.id.rb_speech_type_4:
                         typeStatus = 4;
                         if (four.isChecked()) {
-                            four.setBackgroundResource(R.color.red);
+                            four.setBackgroundResource(R.color.purple);
                             checked = true;
                         }
                         else {
                             four.setBackgroundResource(R.color.LightGray);
                             checked = false;
                         }
-                        one.setBackgroundResource(R.color.LightGray);
-                        two.setBackgroundResource(R.color.LightGray);
-                        three.setBackgroundResource(R.color.LightGray);
+                        five.setBackgroundResource(R.color.LightGray);
+                        six.setBackgroundResource(R.color.LightGray);
+                        break;
+                    case R.id.rb_speech_type_5:
+                        typeStatus = 5;
+                        if (five.isChecked()) {
+                            five.setBackgroundResource(R.color.cleanBlue);
+                            checked = true;
+                        }
+                        else {
+                            five.setBackgroundResource(R.color.LightGray);
+                            checked = false;
+                        }
+                        four.setBackgroundResource(R.color.LightGray);
+                        six.setBackgroundResource(R.color.LightGray);
+                        break;
+                    case R.id.rb_speech_type_6:
+                        typeStatus = 6;
+                        if (six.isChecked()) {
+                            six.setBackgroundResource(R.color.pink);
+                            checked = true;
+                        }
+                        else {
+                            six.setBackgroundResource(R.color.LightGray);
+                            checked = false;
+                        }
+                        four.setBackgroundResource(R.color.LightGray);
+                        five.setBackgroundResource(R.color.LightGray);
                         break;
                     default:
                         typeStatus = 0;
@@ -369,20 +428,24 @@ public class SpeechActivity extends AppCompatActivity {
                 tv_speak_type.setBackgroundColor(Color.parseColor("#FFD700"));
                 break;
             case 2:
-                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_additional));
-                tv_speak_type.setBackgroundColor(Color.parseColor("#63b2f7"));
-                break;
-            case 3:
                 tv_speak_type.setText(getResources().getString(R.string.dialog_speech_ask));
                 tv_speak_type.setBackgroundColor(Color.parseColor("#32CD32"));
                 break;
-            case 4:
+            case 3:
                 tv_speak_type.setText(getResources().getString(R.string.dialog_speech_answer));
                 tv_speak_type.setBackgroundColor(Color.parseColor("#FF0000"));
                 break;
+            case 4:
+                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_refutation));
+                tv_speak_type.setBackgroundColor(Color.parseColor("#800080"));
+                break;
             case 5:
-                tv_speak_type.setText("기타");
-                tv_speak_type.setBackgroundColor(Color.parseColor("#FF4081"));
+                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_additional));
+                tv_speak_type.setBackgroundColor(Color.parseColor("#63b2f7"));
+                break;
+            case 6:
+                tv_speak_type.setText(getResources().getString(R.string.dialog_speech_etc));
+                tv_speak_type.setBackgroundColor(Color.parseColor("#FFC0CB"));
         }
     }
 

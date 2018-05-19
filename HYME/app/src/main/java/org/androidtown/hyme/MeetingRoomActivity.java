@@ -50,7 +50,7 @@ public class MeetingRoomActivity extends AppCompatActivity {
 
         lv_meeting_list.setAdapter(roomList);
 
-        roomList.addItem("졸업 작품 회의방", mUserInfo.getName() + ", 홍길동, 박동민, 김혜미, 김단우, 김전일", "2017/12/10", "05:30 PM");
+        //roomList.addItem("졸업 작품 회의방", mUserInfo.getName() + ", 홍길동, 박동민, 김혜미, 김단우, 김전일", "2017/12/10", "05:30 PM");
 
         getData();
 

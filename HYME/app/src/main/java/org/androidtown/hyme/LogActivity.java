@@ -28,6 +28,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
     CheckBox cb_type_additional;
     CheckBox cb_type_ask;
     CheckBox cb_type_answer;
+    CheckBox cb_type_refute;
     CheckBox cb_type_etc;
     ListView lv_participant_log;
     Button bt_go_previous;
@@ -65,6 +66,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         cb_type_ask = (CheckBox) findViewById(R.id.cb_type_ask);
         cb_type_answer = (CheckBox) findViewById(R.id.cb_type_answer);
         cb_type_etc = (CheckBox) findViewById(R.id.cb_type_etc);
+        cb_type_refute = (CheckBox) findViewById(R.id.cb_type_refute);
 
         logList = new LogList(this);
 
@@ -83,6 +85,7 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
         cb_type_ask.setOnCheckedChangeListener(this);
         cb_type_answer.setOnCheckedChangeListener(this);
         cb_type_etc.setOnCheckedChangeListener(this);
+        cb_type_refute.setOnCheckedChangeListener(this);
 
         bt_share.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -131,28 +134,35 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
             checkView(1, false);
         }
 
-        if (cb_type_additional.isChecked()) {
+        if (cb_type_ask.isChecked()) {
             checkView(2, true);
         } else {
             checkView(2, false);
         }
 
-        if (cb_type_ask.isChecked()) {
+        if (cb_type_answer.isChecked()) {
             checkView(3, true);
         } else {
             checkView(3, false);
         }
 
-        if (cb_type_answer.isChecked()) {
+        if(cb_type_refute.isChecked()){
             checkView(4, true);
         } else {
             checkView(4, false);
         }
 
-        if(cb_type_etc.isChecked()){
+
+        if (cb_type_additional.isChecked()) {
             checkView(5, true);
         } else {
             checkView(5, false);
+        }
+
+        if(cb_type_etc.isChecked()){
+            checkView(6, true);
+        } else {
+            checkView(6, false);
         }
 
     }
@@ -171,21 +181,26 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                         }
                         break;
                     case 2:
-                        if(logList.printType(i).equals("추가")) {
-                            lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
-                        }
-                        break;
-                    case 3:
                         if(logList.printType(i).equals(cb_type_ask.getText().toString())) {
                             lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
                         }
                         break;
-                    case 4:
+                    case 3:
                         if(logList.printType(i).equals(cb_type_answer.getText().toString())) {
                             lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
                         }
                         break;
+                    case 4:
+                        if(logList.printType(i).equals(cb_type_refute.getText().toString())) {
+                            lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
+                        }
+                        break;
                     case 5:
+                        if(logList.printType(i).equals(cb_type_additional.getText().toString())){
+                            lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
+                        }
+                        break;
+                    case 6:
                         if(logList.printType(i).equals(cb_type_etc.getText().toString())){
                             lv_participant_log.getChildAt(i).setVisibility(View.VISIBLE);
                         }
@@ -202,21 +217,26 @@ public class LogActivity extends AppCompatActivity implements CompoundButton.OnC
                         }
                         break;
                     case 2:
-                        if(logList.printType(i).equals("추가")) {
-                            lv_participant_log.getChildAt(i).setVisibility(View.GONE);
-                        }
-                        break;
-                    case 3:
                         if(logList.printType(i).equals(cb_type_ask.getText().toString())) {
                             lv_participant_log.getChildAt(i).setVisibility(View.GONE);
                         }
                         break;
-                    case 4:
+                    case 3:
                         if(logList.printType(i).equals(cb_type_answer.getText().toString())) {
                             lv_participant_log.getChildAt(i).setVisibility(View.GONE);
                         }
                         break;
+                    case 4:
+                        if(logList.printType(i).equals(cb_type_refute.getText().toString())) {
+                            lv_participant_log.getChildAt(i).setVisibility(View.GONE);
+                        }
+                        break;
                     case 5:
+                        if(logList.printType(i).equals(cb_type_additional.getText().toString())){
+                            lv_participant_log.getChildAt(i).setVisibility(View.GONE);
+                        }
+                        break;
+                    case 6:
                         if(logList.printType(i).equals(cb_type_etc.getText().toString())){
                             lv_participant_log.getChildAt(i).setVisibility(View.GONE);
                         }
